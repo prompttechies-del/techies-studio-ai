@@ -27,8 +27,11 @@ export async function POST(req: Request) {
       videoUrl: body.videoUrl
     };
 
-    db.projects = [newProject, ...(db.projects || [])];
-    writeDb(db);
+    const exists = db.projects?.some((p: any) => p.id === body.id);
+    if (!exists) {
+      db.projects = [newProject, ...(db.projects || [])];
+      writeDb(db);
+    }
     
     return NextResponse.json(newProject);
   } catch (error) {

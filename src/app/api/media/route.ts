@@ -28,8 +28,11 @@ export async function POST(req: Request) {
       status: body.status || 'ready'
     };
 
-    db.mediaFiles = [newMedia, ...(db.mediaFiles || [])];
-    writeDb(db);
+    const exists = db.mediaFiles?.some((m: any) => m.id === body.id);
+    if (!exists) {
+      db.mediaFiles = [newMedia, ...(db.mediaFiles || [])];
+      writeDb(db);
+    }
     
     return NextResponse.json(newMedia);
   } catch (error) {
