@@ -67,8 +67,8 @@ import { trimVideo, concatVideos } from "../lib/ffmpeg";
 import { CanvasCompositor, CaptionStyle } from "../lib/canvasCompositor";
 
 export default function Page() {
-  // Navigation: 'dashboard' | 'editor' | 'docs' | 'admin' | 'architecture'
-  const [view, setView] = useState<string>("dashboard");
+  // Navigation State: 'landing' | 'workspace' | 'docs' | 'admin' | 'architecture'
+  const [view, setView] = useState<string>("landing");
   
   // Dashboard metrics
   const [projectsList, setProjectsList] = useState<DBProject[]>([]);
