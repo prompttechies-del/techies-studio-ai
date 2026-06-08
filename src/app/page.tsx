@@ -10,7 +10,7 @@ import {
   Video,
   Volume2,
   Zap,
-  Image,
+  Image as ImageIcon,
   Share2,
   FileCode,
   LayoutDashboard,
@@ -37,220 +37,489 @@ import {
   User,
   Sliders,
   RefreshCw,
-  FolderOpen
+  FolderOpen,
+  VolumeX,
+  Scissors,
+  Download,
+  Info,
+  Layers,
+  History,
+  AlertCircle
 } from "lucide-react";
 
-// Types & Data Mockups
-interface CaptionWord {
-  id: number;
-  word: string;
-  start: number;
-  end: number;
-}
-
-const teluguMockCaptions: CaptionWord[] = [
-  { id: 1, word: "నమస్కారం", start: 0.2, end: 0.8 },
-  { id: 2, word: "తెలుగు", start: 0.9, end: 1.4 },
-  { id: 3, word: "క్రియేటర్స్!", start: 1.5, end: 2.2 },
-  { id: 4, word: "టెక్నికల్", start: 2.3, end: 3.0 },
-  { id: 5, word: "వీడియోలకు", start: 3.1, end: 3.8 },
-  { id: 6, word: "స్వాగతం.", start: 3.9, end: 4.6 },
-  { id: 7, word: "ఈరోజు", start: 4.7, end: 5.2 },
-  { id: 8, word: "మనం", start: 5.3, end: 5.8 },
-  { id: 9, word: "వైరల్", start: 5.9, end: 6.4 },
-  { id: 10, word: "కంటెంట్", start: 6.5, end: 7.2 },
-  { id: 11, word: "తయారు", start: 7.3, end: 7.8 },
-  { id: 12, word: "చేద్దాం!", start: 7.9, end: 8.5 }
-];
-
-// High-fidelity SVG vectors representing the original SaaS product logos
-const CapCutLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-8 h-8 select-none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M50 20 L80 50 L50 80 L20 50 Z" fill="none" stroke="#FFFFFF" strokeWidth="6" />
-    <path d="M50 32 L68 50 L50 68 L32 50 Z" fill="none" stroke="#00F0FF" strokeWidth="5" />
-    <circle cx="50" cy="50" r="8" fill="#FF007F" />
-  </svg>
-);
-
-const SubmagicLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-8 h-8 select-none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M35 25 H25 V75 H35" fill="none" stroke="#FFB800" strokeWidth="8" strokeLinecap="round" />
-    <path d="M65 25 H75 V75 H65" fill="none" stroke="#FFB800" strokeWidth="8" strokeLinecap="round" />
-    <path d="M50 35 L53 47 L65 50 L53 53 L50 65 L47 53 L35 50 L47 47 Z" fill="#FF7A00" />
-  </svg>
-);
-
-const OpusClipLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-8 h-8 select-none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="40" fill="url(#opusGrad)" />
-    <polygon points="42,35 68,50 42,65" fill="#FFFFFF" />
-    <defs>
-      <linearGradient id="opusGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#FF4D00" />
-        <stop offset="100%" stopColor="#FF8F00" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
-
-const VeedLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-8 h-8 select-none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100" height="100" rx="22" fill="#000000" stroke="rgba(255,255,255,0.1)" strokeWidth="2" />
-    <path d="M25 32 L43 68 H57 L75 32 H62 L50 56 L38 32 Z" fill="#FFFFFF" />
-  </svg>
-);
-
-const CanvaLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-8 h-8 select-none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="40" fill="url(#canvaGrad)" />
-    <path d="M62 42 C58 35 48 32 40 38 C32 44 32 56 40 62 C46 66 54 65 60 59" fill="none" stroke="#FFFFFF" strokeWidth="8" strokeLinecap="round" />
-    <defs>
-      <linearGradient id="canvaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#00C4CC" />
-        <stop offset="100%" stopColor="#7D2AE8" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
-
-const AdobePodcastLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-8 h-8 select-none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="100" height="100" rx="20" fill="#002C2D" />
-    <text x="18" y="55" fill="#00E5FF" fontFamily="system-ui" fontSize="30" fontWeight="900">Po</text>
-    <rect x="20" y="65" width="6" height="15" rx="3" fill="#00E5FF" />
-    <rect x="32" y="60" width="6" height="20" rx="3" fill="#00E5FF" />
-    <rect x="44" y="65" width="6" height="15" rx="3" fill="#00E5FF" />
-    <rect x="56" y="70" width="6" height="10" rx="3" fill="#00E5FF" />
-    <rect x="68" y="60" width="6" height="20" rx="3" fill="#00E5FF" />
-    <rect x="80" y="65" width="6" height="15" rx="3" fill="#00E5FF" />
-  </svg>
-);
-
-const DescriptLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-8 h-8 select-none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="40" fill="#00E676" />
-    <circle cx="42" cy="55" r="16" fill="#FFFFFF" />
-    <rect x="50" y="25" width="16" height="46" rx="8" fill="#FFFFFF" />
-  </svg>
-);
-
-const BufferLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-8 h-8 select-none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M50 20 L80 32 L50 44 L20 32 Z" fill="#CCCCCC" />
-    <path d="M50 35 L80 47 L50 59 L20 47 Z" fill="#999999" opacity="0.8" />
-    <path d="M50 50 L80 62 L50 74 L20 62 Z" fill="#666666" opacity="0.6" />
-    <path d="M50 65 L80 77 L50 89 L20 77 Z" fill="#3B82F6" />
-  </svg>
-);
+import {
+  openDB,
+  saveProject,
+  getProject,
+  getAllProjects,
+  deleteProject,
+  saveMedia,
+  getAllMedia,
+  deleteMedia,
+  saveExport,
+  getAllExports,
+  deleteExport,
+  DBProject,
+  DBMedia,
+  DBExport
+} from "../lib/db";
+import { trimVideo, concatVideos } from "../lib/ffmpeg";
+import { CanvasCompositor, CaptionStyle } from "../lib/canvasCompositor";
 
 export default function Page() {
-  // Navigation State: 'landing' | 'workspace' | 'docs' | 'admin' | 'architecture'
-  const [view, setView] = useState<string>("landing");
+  // Navigation: 'dashboard' | 'editor' | 'docs' | 'admin' | 'architecture'
+  const [view, setView] = useState<string>("dashboard");
   
-  // Dashboard Workspace sub-tabs: 'captioner' | 'shorts' | 'audio' | 'thumbnail' | 'publisher'
-  const [workspaceTab, setWorkspaceTab] = useState<string>("captioner");
+  // Dashboard metrics
+  const [projectsList, setProjectsList] = useState<DBProject[]>([]);
+  const [mediaList, setMediaList] = useState<DBMedia[]>([]);
+  const [exportsHistory, setExportsHistory] = useState<DBExport[]>([]);
+  const [storageUsed, setStorageUsed] = useState<string>("0 MB");
+
+  // Active Project & Editor State
+  const [activeProject, setActiveProject] = useState<DBProject | null>(null);
+  const [playhead, setPlayhead] = useState<number>(0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [selectedClipId, setSelectedClipId] = useState<string | null>(null);
+  const [selectedTrackType, setSelectedTrackType] = useState<"video" | "audio" | "subtitle" | null>(null);
+
+  // Editor Tabs Left Sidebar: 'media' | 'text' | 'captions' | 'audio' | 'ai'
+  const [sidebarTab, setSidebarTab] = useState<string>("media");
+
+  // Captions presets and styling states
+  const [captionStyle, setCaptionStyle] = useState<CaptionStyle>({
+    fontFamily: "Inter",
+    fontSize: 24,
+    textColor: "#FFFFFF",
+    outlineColor: "#000000",
+    outlineWidth: 4,
+    shadowColor: "rgba(0,0,0,0.5)",
+    shadowBlur: 5,
+    shadowOffset: 2,
+    yPositionPercent: 80,
+    stylePreset: "bold",
+    animation: "scale"
+  });
+
+  // Media Loader Cache
+  const [videoUrlMap, setVideoUrlMap] = useState<Map<string, string>>(new Map());
+  const videoElementsRef = useRef<Map<string, HTMLVideoElement>>(new Map());
   
-  // Responsive mobile menu state
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  
-  // Landing Page Demo Playback
-  const [demoStyle, setDemoStyle] = useState<string>("bold");
-  const [demoActiveWordIdx, setDemoActiveWordIdx] = useState<number>(0);
-  const [demoPlaying, setDemoPlaying] = useState<boolean>(true);
-  
-  // Modals state
-  const [showDemoModal, setShowDemoModal] = useState<boolean>(false);
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
-  
-  // Workspace specific states
+  // Canvas Compositor Ref
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const compositorRef = useRef<CanvasCompositor | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+
+  // Upload progress indicators
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
-  const [videoFile, setVideoFile] = useState<string | null>(null);
-  const [captionsList, setCaptionsList] = useState<CaptionWord[]>(teluguMockCaptions);
-  const [editWordId, setEditWordId] = useState<number | null>(null);
-  const [editWordText, setEditWordText] = useState<string>("");
-  
-  // Shorts Cropper hook analyzer mock
+
+  // Render & Export configurations
+  const [isExporting, setIsExporting] = useState<boolean>(false);
+  const [exportProgress, setExportProgress] = useState<number>(0);
+  const [exportRes, setExportRes] = useState<string>("1080p");
+  const [exportFps, setExportFps] = useState<number>(30);
+  const [exportBlobUrl, setExportBlobUrl] = useState<string | null>(null);
+
+  // AI Tools panel inputs
   const [shortsUrl, setShortsUrl] = useState<string>("");
   const [analyzingShorts, setAnalyzingShorts] = useState<boolean>(false);
   const [shortsClips, setShortsClips] = useState<any[]>([]);
-  
-  // Audio Enhancer comparison toggle
-  const [audioEnhanced, setAudioEnhanced] = useState<boolean>(false);
-  const [audioPlaying, setAudioPlaying] = useState<boolean>(false);
-  const audioIntervalRef = useRef<any>(null);
-  const [audioProgress, setAudioProgress] = useState<number>(30);
-  
-  // Thumbnail editor states
-  const [thumbnailPrompt, setThumbnailPrompt] = useState<string>("Viral tech review background with glowing neon lights");
-  const [thumbnailText, setThumbnailText] = useState<string>("వైరల్ వీడియోస్!");
-  const [thumbnailColor, setThumbnailColor] = useState<string>("#FFFF00");
-  const [generatingThumbnail, setGeneratingThumbnail] = useState<boolean>(false);
-  const [thumbnailUrl, setThumbnailUrl] = useState<string>("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop");
-  
-  // Social publisher copywriter states
-  const [socialPlatform, setSocialPlatform] = useState<string>("instagram");
-  const [writingCopy, setWritingCopy] = useState<boolean>(false);
-  const [generatedCopy, setGeneratedCopy] = useState<string>("");
-  const [scheduledTime, setScheduledTime] = useState<string>("2026-06-08T18:00");
-  const [scheduledSuccessfully, setScheduledSuccessfully] = useState<boolean>(false);
 
-  // Developer API keys
-  const [apiKeys, setApiKeys] = useState<string[]>(["ts_live_51Npx9T8vKa..."]);
+  // Audio Noise removal settings
+  const [noiseRemovalActive, setNoiseRemovalActive] = useState<boolean>(false);
+  const [audioVolume, setAudioVolume] = useState<number>(1.0);
+
+  // Thumbnail canvas builder states
+  const [thumbPrompt, setThumbPrompt] = useState<string>("Cyberpunk background with neon violet grid highlights");
+  const [thumbText, setThumbText] = useState<string>("తెలుగు AI క్రియేటర్!");
+  const [thumbColor, setThumbColor] = useState<string>("#FFFF00");
+  const [thumbImage, setThumbImage] = useState<string>("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop");
+  const [generatingThumb, setGeneratingThumb] = useState<boolean>(false);
+
+  // Developer API Docs keys
+  const [apiKeys, setApiKeys] = useState<string[]>(["ts_live_92kxNps10k..."]);
   const [copiedKey, setCopiedKey] = useState<boolean>(false);
   const [activeCodeLang, setActiveCodeLang] = useState<string>("curl");
 
-  // Timer loop for Landing Page captions simulator
+  // Load Database Items on Mount
   useEffect(() => {
-    let interval: any;
-    if (demoPlaying) {
-      interval = setInterval(() => {
-        setDemoActiveWordIdx((prev) => (prev + 1) % teluguMockCaptions.length);
-      }, 700);
-    }
-    return () => clearInterval(interval);
-  }, [demoPlaying]);
+    loadDatabaseData();
+  }, []);
 
-  // Audio Playback simulation
+  // Compositor Loop
   useEffect(() => {
-    if (audioPlaying) {
-      audioIntervalRef.current = setInterval(() => {
-        setAudioProgress((prev) => (prev >= 100 ? 0 : prev + 2));
-      }, 200);
-    } else {
-      if (audioIntervalRef.current) clearInterval(audioIntervalRef.current);
+    if (view === "editor" && canvasRef.current) {
+      if (!compositorRef.current) {
+        compositorRef.current = new CanvasCompositor(canvasRef.current);
+      }
+      
+      const loop = () => {
+        if (activeProject) {
+          // Render current frame
+          compositorRef.current?.renderFrame(
+            playhead,
+            activeProject,
+            videoElementsRef.current,
+            captionStyle
+          );
+
+          // Update Audio Nodes
+          compositorRef.current?.applyAudioFilters(noiseRemovalActive, audioVolume);
+        }
+
+        if (isPlaying) {
+          setPlayhead((prev) => {
+            const maxDuration = activeProject 
+              ? Math.max(...activeProject.tracks.video.map(v => v.start + v.duration), 5)
+              : 5;
+            if (prev >= maxDuration) {
+              setIsPlaying(false);
+              return 0;
+            }
+            return prev + 0.033; // ~30fps progress
+          });
+        }
+        animationFrameRef.current = requestAnimationFrame(loop);
+      };
+
+      animationFrameRef.current = requestAnimationFrame(loop);
     }
+
     return () => {
-      if (audioIntervalRef.current) clearInterval(audioIntervalRef.current);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
-  }, [audioPlaying]);
+  }, [view, activeProject, playhead, isPlaying, captionStyle, noiseRemovalActive, audioVolume]);
 
-  // Actions
-  const handleStartFree = () => {
-    setView("workspace");
-    setMenuOpen(false);
+  // Handle Video Elements caching
+  useEffect(() => {
+    // Generate object URLs for raw media files
+    const newMap = new Map<string, string>();
+    mediaList.forEach(media => {
+      const url = URL.createObjectURL(media.data);
+      newMap.set(media.id, url);
+
+      // Cache HTML5 Video Elements
+      if (!videoElementsRef.current.has(media.id)) {
+        const el = document.createElement("video");
+        el.src = url;
+        el.crossOrigin = "anonymous";
+        el.muted = true;
+        el.preload = "auto";
+        videoElementsRef.current.set(media.id, el);
+      }
+    });
+
+    setVideoUrlMap(newMap);
+
+    return () => {
+      newMap.forEach(url => URL.revokeObjectURL(url));
+    };
+  }, [mediaList]);
+
+  const loadDatabaseData = async () => {
+    try {
+      const projects = await getAllProjects();
+      const media = await getAllMedia();
+      const exports = await getAllExports();
+      
+      setProjectsList(projects);
+      setMediaList(media);
+      setExportsHistory(exports);
+
+      // Estimate local IndexedDB storage
+      let bytes = 0;
+      media.forEach(m => bytes += m.size);
+      exports.forEach(e => bytes += e.size);
+      setStorageUsed(`${(bytes / (1024 * 1024)).toFixed(1)} MB`);
+    } catch (e) {
+      console.warn("Failed loading database items:", e);
+    }
   };
 
-  const handleUploadVideo = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Create Project
+  const handleCreateProject = async () => {
+    const id = `proj_${Date.now()}`;
+    const newProj: DBProject = {
+      id,
+      name: `Untitled Project ${projectsList.length + 1}`,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      tracks: {
+        video: [],
+        audio: [],
+        subtitle: [
+          { id: "sub_1", text: "నమస్కారం తెలుగు క్రియేటర్స్!", start: 0.5, duration: 2.5 },
+          { id: "sub_2", text: "టెక్నికల్ వీడియోస్ చేద్దాం!", start: 3.5, duration: 3.0 }
+        ]
+      },
+      settings: {
+        resolution: "1080p",
+        fps: 30,
+        aspectRatio: "9:16" // Default vertical video aspect ratio
+      }
+    };
+
+    await saveProject(newProj);
+    setActiveProject(newProj);
+    setView("editor");
+    loadDatabaseData();
+  };
+
+  // Open Project
+  const handleOpenProject = (proj: DBProject) => {
+    setActiveProject(proj);
+    setPlayhead(0);
+    setIsPlaying(false);
+    setView("editor");
+  };
+
+  // Delete Project
+  const handleDeleteProject = async (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    await deleteProject(id);
+    loadDatabaseData();
+  };
+
+  // Upload Video File (actual binary extraction)
+  const handleUploadMedia = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      setVideoFile(file.name);
       setIsUploading(true);
-      setUploadProgress(0);
-      
-      const interval = setInterval(() => {
-        setUploadProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            setIsUploading(false);
-            return 100;
-          }
-          return prev + 10;
-        });
-      }, 200);
+      setUploadProgress(10);
+
+      // Setup offline video parser to fetch metadata
+      const fileURL = URL.createObjectURL(file);
+      const tempVideo = document.createElement("video");
+      tempVideo.src = fileURL;
+      tempVideo.preload = "metadata";
+
+      tempVideo.onloadedmetadata = async () => {
+        setUploadProgress(50);
+        const duration = tempVideo.duration || 5.0;
+        const resolution = `${tempVideo.videoWidth}x${tempVideo.videoHeight}`;
+
+        const newMedia: DBMedia = {
+          id: `media_${Date.now()}`,
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          duration,
+          resolution,
+          data: file,
+          createdAt: new Date().toISOString()
+        };
+
+        await saveMedia(newMedia);
+        setUploadProgress(100);
+        setIsUploading(false);
+        URL.revokeObjectURL(fileURL);
+        loadDatabaseData();
+      };
+
+      tempVideo.onerror = () => {
+        setIsUploading(false);
+        alert("Invalid video file metadata format.");
+      };
     }
   };
 
+  // Add Clip to Timeline Video Track
+  const handleAddClipToTimeline = (media: DBMedia) => {
+    if (!activeProject) return;
+
+    // Calculate start offset based on current max duration
+    const currentEnd = activeProject.tracks.video.reduce((max, clip) => Math.max(max, clip.start + clip.duration), 0);
+
+    const newClip = {
+      id: `clip_${Date.now()}`,
+      mediaId: media.id,
+      name: media.name,
+      start: currentEnd,
+      cutStart: 0,
+      duration: media.duration,
+      speed: 1.0,
+      scale: 1.0,
+      x: 0,
+      y: 0,
+      rotation: 0,
+      flipX: false,
+      flipY: false
+    };
+
+    const updated = {
+      ...activeProject,
+      tracks: {
+        ...activeProject.tracks,
+        video: [...activeProject.tracks.video, newClip]
+      },
+      updatedAt: new Date().toISOString()
+    };
+
+    setActiveProject(updated);
+    saveProject(updated);
+  };
+
+  // Splitting Clips at Playhead position
+  const handleSplitClip = () => {
+    if (!activeProject || !selectedClipId) return;
+
+    const targetClipIdx = activeProject.tracks.video.findIndex(v => v.id === selectedClipId);
+    if (targetClipIdx === -1) return;
+
+    const clip = activeProject.tracks.video[targetClipIdx];
+    
+    // Check if playhead cuts through clip
+    if (playhead > clip.start && playhead < clip.start + clip.duration) {
+      const leftDuration = playhead - clip.start;
+      const rightDuration = clip.duration - leftDuration;
+
+      // Create two clips
+      const leftClip = { ...clip, id: `clip_${Date.now()}_L`, duration: leftDuration };
+      const rightClip = {
+        ...clip,
+        id: `clip_${Date.now()}_R`,
+        start: playhead,
+        cutStart: clip.cutStart + leftDuration * clip.speed,
+        duration: rightDuration
+      };
+
+      const videoTracks = [...activeProject.tracks.video];
+      videoTracks.splice(targetClipIdx, 1, leftClip, rightClip);
+
+      const updated = {
+        ...activeProject,
+        tracks: { ...activeProject.tracks, video: videoTracks },
+        updatedAt: new Date().toISOString()
+      };
+
+      setActiveProject(updated);
+      saveProject(updated);
+      setSelectedClipId(rightClip.id);
+    }
+  };
+
+  // Delete Clip from Track
+  const handleDeleteClip = () => {
+    if (!activeProject || !selectedClipId) return;
+
+    const updated = {
+      ...activeProject,
+      tracks: {
+        ...activeProject.tracks,
+        video: activeProject.tracks.video.filter(v => v.id !== selectedClipId)
+      },
+      updatedAt: new Date().toISOString()
+    };
+
+    setActiveProject(updated);
+    saveProject(updated);
+    setSelectedClipId(null);
+  };
+
+  // Update Clip Properties (Right Panel Sliders)
+  const handleUpdateClipProperty = (field: string, val: any) => {
+    if (!activeProject || !selectedClipId) return;
+
+    const updated = {
+      ...activeProject,
+      tracks: {
+        ...activeProject.tracks,
+        video: activeProject.tracks.video.map(clip => 
+          clip.id === selectedClipId ? { ...clip, [field]: val } : clip
+        )
+      },
+      updatedAt: new Date().toISOString()
+    };
+
+    setActiveProject(updated);
+    saveProject(updated);
+  };
+
+  // Client-Side Canvas MediaRecorder Exporter
+  const handleExportVideo = async () => {
+    if (!activeProject) return;
+
+    setIsExporting(true);
+    setExportProgress(0);
+
+    try {
+      // Setup audio blobs Map if needed
+      const audioBlobs = new Map<string, Blob>();
+      
+      const compositor = new CanvasCompositor(canvasRef.current!);
+      const exportedBlob = await compositor.startExport(
+        activeProject,
+        videoElementsRef.current,
+        audioBlobs,
+        captionStyle,
+        (p) => setExportProgress(p)
+      );
+
+      const newExport: DBExport = {
+        id: `export_${Date.now()}`,
+        name: `${activeProject.name}_export.mp4`,
+        date: new Date().toLocaleDateString(),
+        size: exportedBlob.size,
+        resolution: exportRes === "1080p" ? "1920x1080" : "1280x720",
+        fps: exportFps,
+        data: exportedBlob
+      };
+
+      await saveExport(newExport);
+      const url = URL.createObjectURL(exportedBlob);
+      setExportBlobUrl(url);
+      loadDatabaseData();
+    } catch (e) {
+      console.error("Local rendering failed:", e);
+      alert("Error local compilation failed.");
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  // AI Thumbnail builder - draw overlays and download PNG
+  const handleGenerateThumbnail = () => {
+    setGeneratingThumb(true);
+    setTimeout(() => {
+      setGeneratingThumb(false);
+      setThumbImage("https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop");
+    }, 1200);
+  };
+
+  const downloadThumbnailImage = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1920;
+    canvas.height = 1080;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const img = new window.Image();
+    img.crossOrigin = "anonymous";
+    img.src = thumbImage;
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, 1920, 1080);
+      
+      // Draw subtitle Text
+      ctx.fillStyle = thumbColor;
+      ctx.strokeStyle = "#000000";
+      ctx.lineWidth = 14;
+      ctx.font = "bold 90px 'FSP DEMO - PODIUM Sharp 4.11', sans-serif";
+      ctx.textAlign = "center";
+      ctx.strokeText(thumbText, 960, 920);
+      ctx.fillText(thumbText, 960, 920);
+
+      // Trigger download
+      const link = document.createElement("a");
+      link.download = "techies_studio_thumbnail.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    };
+  };
+
+  // AI Shorts Hook Analysis Mock
   const triggerShortsAnalysis = () => {
     if (!shortsUrl) return;
     setAnalyzingShorts(true);
@@ -258,1127 +527,906 @@ export default function Page() {
     setTimeout(() => {
       setAnalyzingShorts(false);
       setShortsClips([
-        { id: 1, title: "AI Revolution in Telugu", score: 98, duration: "0:45", start: "01:20", end: "02:05" },
-        { id: 2, title: "SaaS Startups Valuation Secrets", score: 92, duration: "0:58", start: "04:15", end: "05:13" },
-        { id: 3, title: "Telugu Creators Earnings Breakdown", score: 87, duration: "0:30", start: "08:10", end: "08:40" }
+        { id: 1, title: "AI Future in Telugu Script", score: 98, start: 5.0, duration: 25 },
+        { id: 2, title: "Indian Startups Valuation Tricks", score: 91, start: 45.0, duration: 30 }
       ]);
     }, 2000);
   };
 
-  const handleGenerateThumbnail = () => {
-    setGeneratingThumbnail(true);
-    setTimeout(() => {
-      setGeneratingThumbnail(false);
-      setThumbnailUrl("https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop");
-    }, 1500);
-  };
-
-  const handleWriteCopy = () => {
-    setWritingCopy(true);
-    setTimeout(() => {
-      setWritingCopy(false);
-      if (socialPlatform === "instagram") {
-        setGeneratedCopy("🔥 Telugu creators, AI is here to change the game! \n\nTechies Studio AI lets you edit, caption, and publish viral reels in minutes. \n\n👉 Click the link in bio to start editing for free today! \n\n#TeluguCreators #TeluguTech #AIVideoEditing #TechiesStudio #StartupLife #ViralReels");
-      } else if (socialPlatform === "youtube") {
-        setGeneratedCopy("In this video, we explore how Techies Studio AI is revolutionizing video editing and captioning for Telugu content creators. From auto Telugu subtitling to AI Shorts hooks, this is the final toolkit you'll ever need. \n\n💻 Try it Free: https://techiesstudio.ai\n\n📌 Timestamps:\n0:00 - Intro\n1:20 - AI Telugu Captions\n4:15 - Auto Shorts Clip\n\n#TechiesStudio #TeluguAI #VideoEditing #AIStartups");
-      } else {
-        setGeneratedCopy("Viral video edits in 60 seconds. Telugu auto captions, voice enhancement, direct post! 🚀🔥 \n\n#TechiesStudio #AIEditor #TeluguTikTok #CreatorEconomy #SubmagicTelugu");
-      }
-    }, 1200);
-  };
-
-  const handleSchedulePost = () => {
-    setScheduledSuccessfully(true);
-    setTimeout(() => {
-      setScheduledSuccessfully(false);
-    }, 3000);
-  };
-
-  const handleGenerateApiKey = () => {
-    const newKey = `ts_live_${Math.random().toString(36).substring(2, 10)}${Math.random().toString(36).substring(2, 10)}`;
-    setApiKeys([...apiKeys, newKey]);
-  };
-
-  const handleCopyKey = (key: string) => {
-    navigator.clipboard.writeText(key);
-    setCopiedKey(true);
-    setTimeout(() => setCopiedKey(false), 2000);
-  };
-
-  const handleSaveWord = (id: number) => {
-    setCaptionsList(
-      captionsList.map((item) =>
-        item.id === id ? { ...item, word: editWordText } : item
-      )
-    );
-    setEditWordId(null);
-  };
-
   return (
-    <div className="flex-1 flex flex-col min-h-screen relative overflow-hidden bg-[#050505] text-white">
-      
-      {/* Dynamic Ambient Blur Backdrops */}
-      <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-violet-600/10 blur-[120px] pointer-events-none -z-20 animate-pulse duration-10000" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[700px] h-[700px] rounded-full bg-indigo-700/10 blur-[150px] pointer-events-none -z-20" />
+    <div className="flex-1 flex flex-col min-h-screen relative overflow-hidden bg-[#030303] text-white">
       
       {/* ----------------- NAVBAR ----------------- */}
-      <nav className="sticky top-0 z-40 w-full bg-[#050505]/75 backdrop-blur-md border-b border-white/5 px-6 sm:px-10 lg:px-16 py-4 lg:py-5 flex items-center justify-between">
-        
-        {/* Brand Logo */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setView("landing")}>
+      <nav className="sticky top-0 z-40 w-full bg-[#050505]/80 backdrop-blur-md border-b border-white/5 px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setView("dashboard")}>
           <img 
             src="/logo.png" 
             alt="Techies Studio AI Logo" 
-            className="w-9 h-9 rounded-xl object-cover shadow-lg shadow-violet-500/25 border border-violet-500/30"
+            className="w-9 h-9 rounded-xl object-cover border border-violet-500/30"
           />
           <div>
-            <span className="font-podium text-xl sm:text-2xl tracking-wider font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-violet-300">
+            <span className="font-podium text-xl tracking-wider font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-violet-300">
               Techies Studio AI
             </span>
-            <div className="text-[9px] font-inter tracking-[0.2em] uppercase text-violet-400 font-bold -mt-1">
+            <div className="text-[8px] font-inter tracking-[0.2em] uppercase text-violet-400 font-bold -mt-0.5">
               India's AI Creator Platform
             </div>
           </div>
         </div>
 
-        {/* Center Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
-          <button 
-            onClick={() => setView("landing")} 
-            className={`font-inter text-xs tracking-widest uppercase hover:text-white transition ${view === "landing" ? "text-white font-semibold" : "text-white/60"}`}
-          >
-            Studio
-          </button>
-          <button 
-            onClick={() => { setView("workspace"); setWorkspaceTab("captioner"); }} 
-            className={`font-inter text-xs tracking-widest uppercase hover:text-white transition ${view === "workspace" ? "text-white font-semibold" : "text-white/60"}`}
-          >
-            Workspace
-          </button>
-          <button 
-            onClick={() => setView("docs")} 
-            className={`font-inter text-xs tracking-widest uppercase hover:text-white transition ${view === "docs" ? "text-white font-semibold" : "text-white/60"}`}
-          >
-            API Docs
-          </button>
-          <button 
-            onClick={() => setView("architecture")} 
-            className={`font-inter text-xs tracking-widest uppercase hover:text-white transition ${view === "architecture" ? "text-white font-semibold" : "text-white/60"}`}
-          >
-            System Info
-          </button>
-          <button 
-            onClick={() => setView("admin")} 
-            className={`font-inter text-xs tracking-widest uppercase hover:text-white transition ${view === "admin" ? "text-white font-semibold" : "text-white/60"}`}
-          >
-            Admin Cluster
-          </button>
+        <div className="flex items-center gap-6 text-xs uppercase tracking-widest font-inter text-white/60">
+          <button onClick={() => setView("dashboard")} className={`hover:text-white transition ${view === "dashboard" ? "text-violet-400 font-bold" : ""}`}>Dashboard</button>
+          {activeProject && <button onClick={() => setView("editor")} className={`hover:text-white transition ${view === "editor" ? "text-violet-400 font-bold" : ""}`}>Editor</button>}
+          <button onClick={() => setView("docs")} className={`hover:text-white transition ${view === "docs" ? "text-violet-400 font-bold" : ""}`}>API Docs</button>
+          <button onClick={() => setView("architecture")} className={`hover:text-white transition ${view === "architecture" ? "text-violet-400 font-bold" : ""}`}>Architecture</button>
+          <button onClick={() => setView("admin")} className={`hover:text-white transition ${view === "admin" ? "text-violet-400 font-bold" : ""}`}>Admin Cluster</button>
         </div>
 
-        {/* Right CTA Button */}
-        <div className="hidden md:flex items-center gap-4">
-          <button 
-            onClick={handleStartFree} 
-            className="flex items-center gap-1.5 border border-white/20 hover:border-violet-500/50 hover:bg-violet-600/10 px-5 py-2.5 text-xs tracking-widest uppercase font-inter rounded-lg transition-all"
-          >
-            Launch Free
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
+        <div className="flex items-center gap-3">
+          <span className="hidden sm:inline-flex items-center gap-1.5 bg-violet-500/10 text-violet-400 border border-violet-500/20 px-3 py-1 rounded-full text-[10px] font-mono font-bold">
+            <Sparkles className="w-3.5 h-3.5" />
+            100 AI CREDITS
+          </span>
         </div>
-
-        {/* Mobile Hamburguer */}
-        <button className="md:hidden flex flex-col justify-between w-6 h-4" onClick={() => setMenuOpen(true)}>
-          <div className="w-6 h-0.5 bg-white rounded-full" />
-          <div className="w-6 h-0.5 bg-white rounded-full" />
-          <div className="w-4 h-0.5 bg-white rounded-full align-self-end" />
-        </button>
       </nav>
 
-      {/* ----------------- MOBILE OVERLAY MENU ----------------- */}
-      <div className={`fixed inset-0 z-50 bg-[#050505]/98 backdrop-blur-lg transition-all duration-500 flex flex-col px-8 py-6 ${menuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}>
-        <div className="flex items-center justify-between mb-12">
-          <div className="flex items-center gap-3">
-            <img 
-              src="/logo.png" 
-              alt="Techies Studio AI Logo" 
-              className="w-9 h-9 rounded-xl object-cover border border-violet-500/30"
-            />
+      {/* ----------------- DASHBOARD VIEW ----------------- */}
+      {view === "dashboard" && (
+        <div className="flex-1 p-6 sm:p-10 max-w-7xl mx-auto w-full space-y-10">
+          
+          {/* Header Row */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#0a0a0a]/60 border border-white/5 p-6 rounded-3xl">
             <div>
-              <span className="font-podium text-xl tracking-wider font-extrabold">Techies Studio AI</span>
-              <div className="text-[9px] tracking-[0.2em] uppercase text-violet-400 font-bold">India's AI Creator Platform</div>
+              <h1 className="text-2xl font-bold font-inter">Welcome, prompttechies-del</h1>
+              <p className="text-xs text-white/50 font-inter mt-1">Local database usage: {storageUsed} / 500 MB (IndexedDB Storage limit)</p>
             </div>
-          </div>
-          <button onClick={() => setMenuOpen(false)} className="p-2 border border-white/10 rounded-full hover:bg-white/5">
-            <X className="w-6 h-6 text-white" />
-          </button>
-        </div>
-
-        <div className="flex flex-col justify-center flex-1 gap-6 text-left">
-          {[
-            { name: "Brand Studio", view: "landing" },
-            { name: "Creator Workspace", view: "workspace" },
-            { name: "Developer API", view: "docs" },
-            { name: "System Architecture", view: "architecture" },
-            { name: "Admin Dashboard", view: "admin" }
-          ].map((item, i) => (
-            <button
-              key={item.view}
-              onClick={() => {
-                setView(item.view);
-                setMenuOpen(false);
-              }}
-              style={{ transitionDelay: `${i * 60 + 100}ms` }}
-              className={`font-podium text-3xl sm:text-4xl text-left uppercase transition-all duration-300 transform ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"} ${view === item.view ? "text-violet-400 font-bold" : "text-white/60 hover:text-white"}`}
-            >
-              {item.name}
-            </button>
-          ))}
-          
-          <button
-            onClick={handleStartFree}
-            style={{ transitionDelay: `400ms` }}
-            className={`mt-10 flex items-center justify-between w-full max-w-xs border border-violet-500/40 bg-violet-600/10 px-6 py-4 text-sm tracking-widest uppercase font-inter rounded-xl transition transform ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
-          >
-            Launch Free Now
-            <ArrowUpRight className="w-4 h-4 text-violet-400" />
-          </button>
-        </div>
-      </div>
-
-      {/* ----------------- LANDING VIEW ----------------- */}
-      {view === "landing" && (
-        <div className="flex-1 flex flex-col">
-          
-          {/* HERO MARKETING VIEWPORT */}
-          <div className="h-[calc(100vh-69px)] w-full relative flex items-center px-6 sm:px-12 lg:px-24 border-b border-white/5">
             
-            {/* Absolute Fullscreen Video Background */}
-            <div className="absolute inset-0 -z-10 overflow-hidden">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover opacity-35"
-                src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260606_154941_df1a96e1-a06f-450c-bd02-d863414cc1a0.mp4"
-              />
-              {/* Premium dark mesh gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]/20" />
-            </div>
-
-            <div className="grid lg:grid-cols-12 gap-12 items-center w-full max-w-7xl mx-auto z-10 py-8">
-              
-              {/* Left Column: Headline copy */}
-              <div className="lg:col-span-7 flex flex-col justify-center text-left">
-                
-                {/* Crown Tagline */}
-                <div className="animate-fade-up inline-flex items-center gap-2 mb-6 lg:mb-8 bg-white/5 border border-white/10 rounded-full px-4.5 py-1.5 w-fit">
-                  <Crown className="w-4 h-4 text-violet-400" />
-                  <span className="text-[10px] sm:text-xs text-white/80 font-inter tracking-[0.2em] uppercase font-semibold">
-                    India's AI Creator Platform
-                  </span>
-                </div>
-
-                {/* Title (Podium Font, Clamp-sized) */}
-                <h1 className="animate-fade-up-delay-1 font-podium text-white uppercase leading-[0.9] tracking-tight text-[clamp(2.4rem,6vw,5.5rem)] mb-6">
-                  Create Viral<br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-200">
-                    Telugu Videos
-                  </span><br />
-                  In Minutes.
-                </h1>
-
-                {/* Subheading (Inter Font) */}
-                <p className="animate-fade-up-delay-2 text-white/70 text-sm sm:text-base md:text-lg font-inter leading-relaxed max-w-xl mb-8 lg:mb-10">
-                  Auto Telugu captions, viral AI Shorts hooks, thumbnail generation, noise removal, and instant publishing. Everything creators need in one high-performance studio platform.
-                </p>
-
-                {/* Action Row */}
-                <div className="animate-fade-up-delay-3 flex flex-wrap items-center gap-4 sm:gap-6">
-                  
-                  <button 
-                    onClick={handleStartFree} 
-                    className="group flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-400 text-white px-7 py-4 text-xs tracking-widest uppercase font-bold rounded-xl shadow-lg shadow-violet-500/20 hover:shadow-violet-500/30 transition-all duration-300"
-                  >
-                    Start Free
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition" />
-                  </button>
-
-                  <button 
-                    onClick={() => setShowDemoModal(true)} 
-                    className="flex items-center gap-2 border border-white/20 hover:border-white/50 hover:bg-white/5 text-white px-7 py-4 text-xs tracking-widest uppercase font-bold rounded-xl transition"
-                  >
-                    Watch Demo
-                  </button>
-
-                  {/* Award Badge (hidden on mobile) */}
-                  <div className="hidden sm:flex items-center gap-3 border-l border-white/10 pl-6 ml-2">
-                    <Award className="w-8 h-8 text-violet-400" />
-                    <div>
-                      <div className="text-[10px] text-white/50 tracking-wider uppercase font-inter">Top-Rated</div>
-                      <div className="text-xs text-white/80 font-bold uppercase font-inter">Brand Studio</div>
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Stats Row */}
-                <div className="animate-fade-up-delay-4 mt-12 lg:mt-16 flex flex-wrap gap-8 sm:gap-14 border-t border-white/5 pt-8">
-                  <div>
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">250+</div>
-                    <div className="text-[10px] text-white/40 tracking-widest uppercase font-inter mt-1">Brands Transformed</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">95%</div>
-                    <div className="text-[10px] text-white/40 tracking-widest uppercase font-inter mt-1">Client Retention</div>
-                  </div>
-                  <div>
-                    <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">10+</div>
-                    <div className="text-[10px] text-white/40 tracking-widest uppercase font-inter mt-1">Years in the Game</div>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Right Column: Interactive Editor Sandbox / Simulation */}
-              <div className="lg:col-span-5 flex justify-center">
-                <div className="animate-scale-in w-full max-w-sm rounded-2xl border border-white/10 bg-[#0c0c0c]/80 backdrop-blur-xl p-5 relative shadow-2xl shadow-violet-950/20">
-                  
-                  {/* Decorative card header */}
-                  <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-3">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-500" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                      <div className="w-3 h-3 rounded-full bg-green-500" />
-                    </div>
-                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">Interactive Sandbox</span>
-                  </div>
-
-                  {/* Vertically Mock Mobile Video Preview Frame */}
-                  <div className="w-full aspect-[9/16] rounded-xl overflow-hidden relative bg-neutral-900 border border-white/5 flex flex-col items-center justify-center p-6 shadow-inner">
-                    <img 
-                      src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop"
-                      alt="Sample background video frame"
-                      className="absolute inset-0 w-full h-full object-cover opacity-60"
-                    />
-                    {/* Shadow overlay to read text */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
-
-                    {/* Top simulation metrics */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[10px] text-white/80 font-mono">
-                      <span>FPS: 60.00</span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
-                        RENDER
-                      </span>
-                    </div>
-
-                    {/* Center Animated Telugu Captions based on Selected Style */}
-                    <div className="z-10 flex flex-col items-center justify-center text-center mt-auto mb-16 select-none">
-                      {demoStyle === "neon" && (
-                        <div className="text-xl sm:text-2xl font-black text-[#39FF14] tracking-wider drop-shadow-[0_0_8px_#39FF14] uppercase">
-                          {teluguMockCaptions[demoActiveWordIdx].word}
-                        </div>
-                      )}
-                      {demoStyle === "glow" && (
-                        <div className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.8)] font-podium">
-                          {teluguMockCaptions[demoActiveWordIdx].word}
-                        </div>
-                      )}
-                      {demoStyle === "bold" && (
-                        <div className="bg-yellow-400 text-black px-4 py-1.5 rounded-md font-extrabold text-lg sm:text-xl border-2 border-black rotate-[-2deg] shadow-[4px_4px_0px_#000]">
-                          {teluguMockCaptions[demoActiveWordIdx].word}
-                        </div>
-                      )}
-                      {demoStyle === "minimal" && (
-                        <div className="text-white text-base tracking-widest font-light lowercase">
-                          ...{teluguMockCaptions[demoActiveWordIdx].word}...
-                        </div>
-                      )}
-                      
-                      <div className="text-[10px] text-white/50 tracking-wider font-mono mt-4">
-                        (Active subtitle sync: {teluguMockCaptions[demoActiveWordIdx].start}s)
-                      </div>
-                    </div>
-
-                    {/* Bottom simulated play bar */}
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
-                      <button onClick={() => setDemoPlaying(!demoPlaying)} className="p-1.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full text-white">
-                        {demoPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-                      </button>
-                      <span className="text-[9px] font-mono text-white/60">00:0{demoActiveWordIdx} / 00:12</span>
-                    </div>
-                  </div>
-
-                  {/* Interactive Caption Style Presets Selector */}
-                  <div className="mt-4">
-                    <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase mb-2 block font-inter">Caption Style Presets</label>
-                    <div className="grid grid-cols-4 gap-2">
-                      {[
-                        { id: "bold", label: "Submagic" },
-                        { id: "neon", label: "Neon" },
-                        { id: "glow", label: "Glow" },
-                        { id: "minimal", label: "Minimal" }
-                      ].map((style) => (
-                        <button
-                          key={style.id}
-                          onClick={() => setDemoStyle(style.id)}
-                          className={`py-2 px-1 text-[10px] font-semibold rounded-lg border uppercase tracking-wider font-inter transition-all ${demoStyle === style.id ? "bg-violet-600 border-violet-500 text-white shadow-lg" : "bg-[#141414] border-white/5 text-white/60 hover:border-white/10 hover:text-white"}`}
-                        >
-                          {style.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-
+            <button 
+              onClick={handleCreateProject}
+              className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-400 px-6 py-3.5 rounded-xl text-xs uppercase tracking-widest font-bold font-inter shadow-lg shadow-violet-500/20 transition-all"
+            >
+              <Plus className="w-4 h-4" />
+              Create New Project
+            </button>
           </div>
 
-          {/* 10 CORE FEATURES MATRIX */}
-          <div className="py-24 px-6 sm:px-12 lg:px-24 bg-[#080808] border-b border-white/5">
-            <div className="max-w-7xl mx-auto text-center">
-              
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-violet-400 font-inter">Complete Ecosystem</span>
-              <h2 className="font-podium text-4xl sm:text-5xl uppercase tracking-wide mt-3 mb-6">Packed With AI Power</h2>
-              <p className="text-white/60 text-sm max-w-xl mx-auto mb-16 font-inter leading-relaxed">
-                Everything you need to turn video ideas into high-quality viral posts. Tailored specifically for Indian and Telugu creators.
-              </p>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 text-left">
-                {[
-                  { icon: <CapCutLogo />, title: "Pro Video Splicing", desc: "Split, crop, zoom, and splice your high-definition timelines directly in browser. (Inspired by CapCut)" },
-                  { icon: <SubmagicLogo />, title: "Auto Telugu Captions", desc: "Transcribe spoken Telugu with industry-leading 99% Whisper-based accuracy. (Inspired by Submagic)" },
-                  { icon: <OpusClipLogo />, title: "AI Viral Shorts", desc: "Auto-detect high-relevance video hooks and crop landscape videos into vertical 9:16 clips. (Inspired by Opus Clip)" },
-                  { icon: <VeedLogo />, title: "Subtitle Translator", desc: "Instantly translate subtitles between Telugu, English, Hindi, and 20+ other languages. (Inspired by VEED.IO)" },
-                  { icon: <CanvaLogo />, title: "AI Thumbnail Studio", desc: "Generate click-worthy thumbnails using state-of-the-art Flux models with custom text overlay. (Inspired by Canva)" },
-                  { icon: <AdobePodcastLogo />, title: "Noise Removal", desc: "Instantly filter out background ambient sounds, street noises, and humming. (Inspired by Adobe Podcast)" },
-                  { icon: <DescriptLogo />, title: "Voice Enhancement", desc: "Give audio files a premium studio-podcast quality polish using AI equalizer algorithms. (Inspired by Descript)" },
-                  { icon: <BufferLogo />, title: "Social Publisher", desc: "Generate optimized titles, copy description, and hashtags; schedule posts directly. (Inspired by Buffer)" }
-                ].map((feat, index) => (
-                  <div key={index} className="p-6 rounded-2xl bg-[#0d0d0d] border border-white/5 hover:border-white/10 hover:bg-[#121212] transition-all group">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-start mb-5 group-hover:scale-110 transition duration-300">
-                      {feat.icon}
+          {/* Projects List Grid */}
+          <div className="space-y-4">
+            <h2 className="text-sm font-bold tracking-widest text-white/40 uppercase pl-1 font-inter">Recent Projects</h2>
+            
+            {projectsList.length === 0 ? (
+              <div className="p-12 text-center border border-dashed border-white/10 rounded-3xl bg-[#080808]/40">
+                <FolderOpen className="w-10 h-10 text-white/20 mx-auto mb-4" />
+                <p className="text-sm text-white/50 font-inter">No projects found. Click "Create New Project" to get started.</p>
+              </div>
+            ) : (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {projectsList.map((proj) => (
+                  <div 
+                    key={proj.id}
+                    onClick={() => handleOpenProject(proj)}
+                    className="p-6 rounded-2xl bg-[#0b0b0b] border border-white/5 hover:border-violet-500/20 hover:bg-[#0e0d12]/50 transition-all cursor-pointer group flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-xs font-mono text-white/40">{new Date(proj.createdAt).toLocaleDateString()}</span>
+                        <button 
+                          onClick={(e) => handleDeleteProject(proj.id, e)}
+                          className="p-1.5 hover:bg-red-500/10 border border-white/5 hover:border-red-500/20 rounded-lg text-white/40 hover:text-red-500 transition"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <h3 className="font-bold text-base font-inter text-white group-hover:text-violet-400 transition">{proj.name}</h3>
+                      <p className="text-[10px] text-white/40 font-mono mt-1 uppercase tracking-wider">
+                        {proj.settings.resolution} • {proj.settings.fps} FPS • {proj.settings.aspectRatio} Aspect
+                      </p>
                     </div>
-                    <h3 className="font-bold text-white text-base font-inter mb-2">{feat.title}</h3>
-                    <p className="text-white/50 text-xs leading-relaxed font-inter">{feat.desc}</p>
+
+                    <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-4">
+                      <span className="text-[10px] text-white/40 font-inter">Open project editor</span>
+                      <ChevronRight className="w-4 h-4 text-white/30 group-hover:translate-x-1 group-hover:text-violet-400 transition" />
+                    </div>
                   </div>
                 ))}
               </div>
-
-            </div>
+            )}
           </div>
 
-          {/* PRICING SECTION */}
-          <div className="py-24 px-6 sm:px-12 lg:px-24 bg-[#050505]">
-            <div className="max-w-7xl mx-auto text-center">
-              
-              <span className="text-xs font-bold tracking-[0.3em] uppercase text-violet-400 font-inter">Transparent Pricing</span>
-              <h2 className="font-podium text-4xl sm:text-5xl uppercase tracking-wide mt-3 mb-6">Simple Creator Plans</h2>
-              
-              {/* Billing Cycle Toggle */}
-              <div className="flex items-center justify-center gap-4 mb-16">
-                <span className={`text-xs font-inter uppercase tracking-widest ${billingCycle === "monthly" ? "text-white font-bold" : "text-white/50"}`}>Monthly</span>
-                <button 
-                  onClick={() => setBillingCycle(billingCycle === "monthly" ? "annual" : "monthly")}
-                  className="w-12 h-6 bg-violet-600/30 border border-violet-500/30 rounded-full p-1 relative transition-all duration-300"
-                >
-                  <div className={`w-4 h-4 bg-violet-400 rounded-full transition-all duration-300 ${billingCycle === "annual" ? "translate-x-6" : "translate-x-0"}`} />
-                </button>
-                <span className={`text-xs font-inter uppercase tracking-widest ${billingCycle === "annual" ? "text-white font-bold" : "text-white/50"}`}>
-                  Annual <span className="text-violet-400 text-[10px] font-semibold bg-violet-500/10 px-2 py-0.5 rounded-full lowercase">save 20%</span>
-                </span>
+          {/* Local Exports History List */}
+          <div className="space-y-4">
+            <h2 className="text-sm font-bold tracking-widest text-white/40 uppercase pl-1 font-inter">Export History</h2>
+            
+            {exportsHistory.length === 0 ? (
+              <div className="p-6 text-center border border-white/5 rounded-2xl bg-[#080808]/40">
+                <p className="text-xs text-white/40 font-inter">No exported videos found. Render files in the project workspace.</p>
               </div>
-
-              {/* Pricing Cards Grid */}
-              <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
-                
-                {/* Plan 1: Free */}
-                <div className="p-8 rounded-3xl border border-white/5 bg-[#0b0b0b] flex flex-col justify-between hover:border-white/15 transition-all">
-                  <div>
-                    <h3 className="text-lg font-bold font-inter text-white mb-2">Free Starter</h3>
-                    <p className="text-xs text-white/50 font-inter mb-6">Essential AI tools to get started as a video creator.</p>
-                    <div className="text-3xl font-extrabold font-inter text-white mb-6">
-                      ₹0<span className="text-xs text-white/40 font-normal"> / month</span>
+            ) : (
+              <div className="space-y-3">
+                {exportsHistory.map((rec) => (
+                  <div key={rec.id} className="p-4 rounded-xl border border-white/5 bg-[#0b0b0b] flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-lg bg-violet-600/15 border border-violet-500/20 flex items-center justify-center">
+                        <Video className="w-5 h-5 text-violet-400" />
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-bold font-inter text-white">{rec.name}</h4>
+                        <p className="text-[9px] text-white/40 font-mono mt-0.5 uppercase">
+                          {rec.resolution} • {rec.fps} FPS • {(rec.size / (1024 * 1024)).toFixed(2)} MB • {rec.date}
+                        </p>
+                      </div>
                     </div>
-                    <ul className="space-y-3.5 mb-8">
-                      {["5 exports per month", "Standard auto captions", "Max 720p output resolution", "Techies Studio watermark"].map((pt) => (
-                        <li key={pt} className="flex items-center gap-2.5 text-xs text-white/70 font-inter">
-                          <CheckCircle className="w-4 h-4 text-violet-500 flex-shrink-0" />
-                          {pt}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button onClick={handleStartFree} className="w-full py-3 text-xs tracking-widest font-bold uppercase font-inter border border-white/15 hover:border-white/40 hover:bg-white/5 rounded-xl transition text-center">
-                    Get Started
-                  </button>
-                </div>
-
-                {/* Plan 2: Creator Pro (Popular) */}
-                <div className="p-8 rounded-3xl border-2 border-violet-500 bg-[#0e0c12] flex flex-col justify-between relative shadow-xl shadow-violet-950/20 transform md:scale-105">
-                  <div className="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-violet-600 to-indigo-500 text-white font-inter text-[9px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full border border-violet-400">
-                    MOST POPULAR
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold font-inter text-white mb-2">Creator Pro</h3>
-                    <p className="text-xs text-white/50 font-inter mb-6">Perfect toolkit for professional YouTubers and creators.</p>
-                    <div className="text-3xl font-extrabold font-inter text-white mb-6">
-                      {billingCycle === "monthly" ? "₹999" : "₹799"}<span className="text-xs text-white/40 font-normal"> / month</span>
+                    
+                    <div className="flex items-center gap-2">
+                      <button 
+                        onClick={() => {
+                          const link = document.createElement("a");
+                          link.download = rec.name;
+                          link.href = URL.createObjectURL(rec.data);
+                          link.click();
+                        }}
+                        className="flex items-center gap-1 bg-white/5 hover:bg-violet-600 border border-white/10 hover:border-violet-500 px-3.5 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider font-inter transition"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        Download
+                      </button>
+                      
+                      <button 
+                        onClick={async () => {
+                          await deleteExport(rec.id);
+                          loadDatabaseData();
+                        }}
+                        className="p-2 border border-white/10 hover:border-red-500/30 hover:bg-red-500/5 rounded-lg text-white/30 hover:text-red-500 transition"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     </div>
-                    <ul className="space-y-3.5 mb-8">
-                      {["Unlimited video exports", "Telugu + 20 language transcription", "Premium Submagic caption styles", "No watermarks & 4K quality", "AI Shorts Hook auto clipper", "Pro Audio Enhancer (EQ + Noise)"].map((pt) => (
-                        <li key={pt} className="flex items-center gap-2.5 text-xs text-white/80 font-inter">
-                          <CheckCircle className="w-4 h-4 text-violet-400 flex-shrink-0" />
-                          {pt}
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                  <button onClick={handleStartFree} className="w-full py-4 text-xs tracking-widest font-bold uppercase font-inter bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-400 text-white rounded-xl shadow-lg shadow-violet-500/20 transition text-center">
-                    Go Pro Now
-                  </button>
-                </div>
-
-                {/* Plan 3: Agency */}
-                <div className="p-8 rounded-3xl border border-white/5 bg-[#0b0b0b] flex flex-col justify-between hover:border-white/15 transition-all">
-                  <div>
-                    <h3 className="text-lg font-bold font-inter text-white mb-2">Agency Studio</h3>
-                    <p className="text-xs text-white/50 font-inter mb-6">For media agencies and large content houses.</p>
-                    <div className="text-3xl font-extrabold font-inter text-white mb-6">
-                      {billingCycle === "monthly" ? "₹4,999" : "₹3,999"}<span className="text-xs text-white/40 font-normal"> / month</span>
-                    </div>
-                    <ul className="space-y-3.5 mb-8">
-                      {["Everything in Creator Pro", "Full Developer API access", "5 team member accounts", "Dedicated transcription nodes", "Custom caption font styling", "Priority VIP rendering queue"].map((pt) => (
-                        <li key={pt} className="flex items-center gap-2.5 text-xs text-white/70 font-inter">
-                          <CheckCircle className="w-4 h-4 text-violet-500 flex-shrink-0" />
-                          {pt}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button onClick={handleStartFree} className="w-full py-3 text-xs tracking-widest font-bold uppercase font-inter border border-white/15 hover:border-white/40 hover:bg-white/5 rounded-xl transition text-center">
-                    Inquire Studio
-                  </button>
-                </div>
-
+                ))}
               </div>
-
-            </div>
+            )}
           </div>
-
-          {/* FOOTER */}
-          <footer className="mt-auto border-t border-white/5 bg-[#030303] py-12 px-6 sm:px-12 lg:px-24">
-            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-3">
-                <img 
-                  src="/logo.png" 
-                  alt="Techies Studio AI Logo" 
-                  className="w-7 h-7 rounded-lg object-cover border border-violet-500/30"
-                />
-                <div>
-                  <span className="font-podium text-base tracking-wider font-extrabold">Techies Studio AI</span>
-                  <span className="text-[10px] font-mono text-white/40 ml-2">© 2026 Prompt Techies</span>
-                </div>
-              </div>
-              <div className="flex gap-8 text-xs text-white/40 font-inter">
-                <button className="hover:text-white" onClick={() => setView("docs")}>Developer API</button>
-                <button className="hover:text-white" onClick={() => setView("architecture")}>Architecture</button>
-                <button className="hover:text-white" onClick={() => setView("admin")}>GPU Cluster Status</button>
-              </div>
-            </div>
-          </footer>
-
-          {/* SIMULATED WATCH DEMO VIDEO MODAL */}
-          {showDemoModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4">
-              <div className="w-full max-w-4xl bg-[#0f0f0f] border border-white/10 rounded-2xl overflow-hidden relative">
-                <button 
-                  onClick={() => setShowDemoModal(false)}
-                  className="absolute top-4 right-4 z-10 p-2 bg-black/60 border border-white/10 hover:bg-black/80 rounded-full text-white"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-                <div className="aspect-video relative bg-black flex items-center justify-center">
-                  <video 
-                    autoPlay
-                    controls
-                    className="w-full h-full object-contain"
-                    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260606_154941_df1a96e1-a06f-450c-bd02-d863414cc1a0.mp4"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-lg font-bold font-inter text-white">Techies Studio AI - Showcase Reel</h3>
-                  <p className="text-xs text-white/50 font-inter mt-1">
-                    Watch how our neural engines process video splicing, Telugu translations, and Submagic caption overlays in under 45 seconds.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
 
         </div>
       )}
 
-      {/* ----------------- WORKSPACE CREATOR DASHBOARD ----------------- */}
-      {view === "workspace" && (
-        <div className="flex-1 flex flex-col md:flex-row bg-[#080808]">
+      {/* ----------------- WORKSPACE EDITOR VIEW ----------------- */}
+      {view === "editor" && activeProject && (
+        <div className="flex-1 flex flex-col h-[calc(100vh-69px)] overflow-hidden">
           
-          {/* Workspace Left Menu Sidebar */}
-          <aside className="w-full md:w-64 bg-[#0a0a0a] border-r border-white/5 flex flex-row md:flex-col p-4 md:p-6 gap-2 overflow-x-auto md:overflow-x-visible md:overflow-y-auto">
+          {/* Main workspace splits */}
+          <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
             
-            <div className="hidden md:block text-[9px] font-bold tracking-widest text-white/30 uppercase mb-4 pl-3">
-              Creator Studio Tools
-            </div>
+            {/* 1. LEFT SIDEBAR TAB CONTROLLERS */}
+            <aside className="w-full lg:w-16 bg-[#0a0a0a] border-r border-white/5 flex flex-row lg:flex-col items-center justify-around lg:justify-start lg:py-6 gap-6 overflow-x-auto lg:overflow-x-visible">
+              {[
+                { id: "media", icon: <Layers className="w-5 h-5" />, label: "Media" },
+                { id: "captions", icon: <Sparkles className="w-5 h-5" />, label: "Captions" },
+                { id: "audio", icon: <Volume2 className="w-5 h-5" />, label: "Audio" },
+                { id: "ai", icon: <Zap className="w-5 h-5" />, label: "AI Tools" },
+                { id: "thumbnail", icon: <ImageIcon className="w-5 h-5" />, label: "Thumb" }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setSidebarTab(tab.id)}
+                  className={`p-3 rounded-xl transition-all relative group ${sidebarTab === tab.id ? "bg-violet-600 text-white" : "text-white/40 hover:text-white"}`}
+                >
+                  {tab.icon}
+                  <span className="hidden lg:group-hover:block absolute left-14 top-1/2 -translate-y-1/2 bg-black border border-white/10 px-2 py-1 rounded text-[9px] uppercase tracking-wider z-20 whitespace-nowrap">
+                    {tab.label}
+                  </span>
+                </button>
+              ))}
+            </aside>
 
-            {[
-              { id: "captioner", label: "AI Captioner", icon: <Sparkles className="w-4 h-4" /> },
-              { id: "shorts", label: "AI Shorts Hooks", icon: <Zap className="w-4 h-4" /> },
-              { id: "audio", label: "Audio Enhancer", icon: <Volume2 className="w-4 h-4" /> },
-              { id: "thumbnail", label: "Thumbnail Studio", icon: <Image className="w-4 h-4" /> },
-              { id: "publisher", label: "Social Publisher", icon: <Share2 className="w-4 h-4" /> }
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setWorkspaceTab(tab.id)}
-                className={`flex items-center gap-3 w-full text-left py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-semibold font-inter transition-all ${workspaceTab === tab.id ? "bg-violet-600 text-white shadow-lg shadow-violet-600/10 font-bold" : "text-white/60 hover:bg-white/5 hover:text-white"}`}
-              >
-                {tab.icon}
-                <span className="whitespace-nowrap">{tab.label}</span>
-              </button>
-            ))}
-
-            <div className="hidden md:block mt-auto pt-6 border-t border-white/5">
-              <button 
-                onClick={() => setView("landing")} 
-                className="flex items-center gap-2 text-[10px] text-white/40 uppercase tracking-widest hover:text-white transition w-full pl-3"
-              >
-                ← Back to Studio Home
-              </button>
-            </div>
-          </aside>
-
-          {/* Workspace Workspace Content Panel */}
-          <main className="flex-1 p-6 md:p-10 flex flex-col justify-start">
-            
-            {/* TAB 1: AI CAPTIONER */}
-            {workspaceTab === "captioner" && (
-              <div className="flex-1 flex flex-col">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-6 mb-8">
-                  <div>
-                    <h2 className="text-xl font-bold font-inter text-white">AI Subtitle & Caption Generator</h2>
-                    <p className="text-xs text-white/40 font-inter mt-1">Upload files and automatically generate styled Telugu captions with Whisper transcription.</p>
-                  </div>
-                  
-                  {/* File Upload Button */}
-                  <div className="relative">
-                    <input 
-                      type="file" 
-                      accept="video/*" 
-                      onChange={handleUploadVideo} 
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                      disabled={isUploading}
-                    />
-                    <button className="flex items-center gap-2 bg-violet-600 hover:bg-violet-500 px-5 py-3 rounded-lg text-xs uppercase tracking-widest font-bold font-inter transition duration-300">
-                      <Upload className="w-4 h-4" />
-                      Upload Video
-                    </button>
-                  </div>
-                </div>
-
-                {/* Upload Status Card */}
-                {isUploading && (
-                  <div className="mb-6 p-5 rounded-xl border border-white/10 bg-white/5 max-w-xl">
-                    <div className="flex items-center justify-between text-xs text-white/80 font-mono mb-2">
-                      <span>Uploading: {videoFile}</span>
-                      <span>{uploadProgress}%</span>
-                    </div>
-                    <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                      <div className="h-full bg-violet-500 transition-all duration-300" style={{ width: `${uploadProgress}%` }} />
-                    </div>
-                  </div>
-                )}
-
-                {/* Main Captioner Screen */}
-                <div className="grid lg:grid-cols-12 gap-8 items-start">
-                  
-                  {/* Video Player Preview Column */}
-                  <div className="lg:col-span-5 bg-neutral-900 border border-white/5 rounded-2xl overflow-hidden aspect-[9/16] max-w-xs mx-auto w-full relative flex flex-col items-center justify-center p-6 shadow-inner">
-                    <img 
-                      src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop"
-                      alt="Captioner background frame"
-                      className="absolute inset-0 w-full h-full object-cover opacity-50"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
-
-                    {/* Styled active caption rendering */}
-                    <div className="z-10 flex flex-col items-center justify-center text-center mt-auto mb-20 select-none">
-                      <div className="bg-yellow-400 text-black px-4 py-1.5 rounded-md font-extrabold text-lg sm:text-xl border-2 border-black rotate-[-2deg] shadow-[4px_4px_0px_#000]">
-                        {captionsList[demoActiveWordIdx]?.word || "నమస్కారం"}
-                      </div>
-                      <div className="text-[10px] text-white/40 tracking-wider font-mono mt-3">
-                        Word sync: {captionsList[demoActiveWordIdx]?.start}s - {captionsList[demoActiveWordIdx]?.end}s
-                      </div>
-                    </div>
-
-                    <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
-                      <button onClick={() => setDemoPlaying(!demoPlaying)} className="p-1.5 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full text-white">
-                        {demoPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+            {/* 2. INNER WORKSPACE LEFT PANEL */}
+            <div className="w-full lg:w-80 bg-[#080808] border-r border-white/5 flex flex-col overflow-y-auto">
+              
+              {/* Media Manager panel */}
+              {sidebarTab === "media" && (
+                <div className="p-5 space-y-6">
+                  <div className="flex items-center justify-between border-b border-white/5 pb-3">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-white/50">Media Manager</h3>
+                    
+                    {/* Add local file */}
+                    <div className="relative">
+                      <input 
+                        type="file" 
+                        accept="video/*" 
+                        onChange={handleUploadMedia}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        disabled={isUploading}
+                      />
+                      <button className="p-1 border border-white/10 hover:border-violet-500 rounded-lg text-white/60 hover:text-violet-400 transition">
+                        <Plus className="w-4 h-4" />
                       </button>
-                      <span className="text-[9px] font-mono text-white/60">00:0{demoActiveWordIdx} / 00:12</span>
                     </div>
                   </div>
 
-                  {/* Transcription Editor & Timestamps Column */}
-                  <div className="lg:col-span-7 bg-[#0b0b0b] border border-white/5 rounded-2xl p-6">
-                    <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
-                      <span className="text-xs font-bold tracking-widest text-white/50 uppercase font-inter">Transcribed Captions (Telugu)</span>
-                      <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full font-mono">Whisper v3 Active</span>
+                  {isUploading && (
+                    <div className="p-4 rounded-xl border border-white/10 bg-white/5 space-y-2">
+                      <div className="flex justify-between text-[10px] font-mono text-white/60">
+                        <span>Uploading...</span>
+                        <span>{uploadProgress}%</span>
+                      </div>
+                      <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-full bg-violet-500" style={{ width: `${uploadProgress}%` }} />
+                      </div>
                     </div>
+                  )}
 
-                    <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2">
-                      {captionsList.map((item, idx) => (
+                  {mediaList.length === 0 ? (
+                    <div className="text-center p-8 border border-dashed border-white/5 rounded-xl text-white/30 text-xs font-inter">
+                      Upload video files using the (+) button above.
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-3">
+                      {mediaList.map((media) => (
                         <div 
-                          key={item.id} 
-                          className={`flex items-center justify-between p-3.5 rounded-xl border transition-all ${idx === demoActiveWordIdx ? "bg-violet-600/15 border-violet-500/35" : "bg-white/2 border-white/5 hover:border-white/10"}`}
+                          key={media.id}
+                          className="bg-[#0b0b0b] border border-white/5 rounded-xl p-3 hover:border-violet-500/35 transition cursor-pointer relative group"
                         >
-                          <div className="flex items-center gap-3">
-                            <span className="text-[10px] font-mono text-white/40 font-bold bg-white/5 px-2 py-1 rounded">
-                              {item.start.toFixed(1)}s
-                            </span>
-                            {editWordId === item.id ? (
-                              <input 
-                                type="text" 
-                                value={editWordText}
-                                onChange={(e) => setEditWordText(e.target.value)}
-                                className="bg-neutral-800 border border-white/20 text-white rounded px-2.5 py-1 text-xs outline-none focus:border-violet-500"
-                                onKeyDown={(e) => e.key === "Enter" && handleSaveWord(item.id)}
-                                autoFocus
-                              />
-                            ) : (
-                              <span 
-                                onClick={() => { setEditWordId(item.id); setEditWordText(item.word); }}
-                                className="text-xs text-white cursor-pointer hover:underline hover:text-violet-400 font-semibold font-inter"
-                              >
-                                {item.word}
-                              </span>
-                            )}
+                          <div 
+                            onClick={() => handleAddClipToTimeline(media)}
+                            className="aspect-square bg-neutral-900 rounded-lg flex items-center justify-center text-white/20 mb-2 relative overflow-hidden"
+                          >
+                            <Video className="w-6 h-6" />
+                            {/* Hover add action */}
+                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                              <span className="text-[9px] bg-violet-600 text-white font-bold px-2 py-1 rounded">ADD CLIP</span>
+                            </div>
                           </div>
+                          <h4 className="text-[10px] font-bold font-inter text-white truncate">{media.name}</h4>
+                          <span className="text-[8px] font-mono text-white/40">{media.resolution} • {media.duration.toFixed(1)}s</span>
                           
-                          <div className="flex items-center gap-2">
-                            {editWordId === item.id ? (
-                              <button onClick={() => handleSaveWord(item.id)} className="text-[10px] bg-violet-600 text-white px-2.5 py-1 rounded hover:bg-violet-500 font-bold">
-                                Save
-                              </button>
-                            ) : (
-                              <button 
-                                onClick={() => { setEditWordId(item.id); setEditWordText(item.word); }}
-                                className="text-[10px] text-white/40 hover:text-white font-mono"
-                              >
-                                edit
-                              </button>
-                            )}
-                          </div>
+                          <button 
+                            onClick={async (e) => {
+                              e.stopPropagation();
+                              await deleteMedia(media.id);
+                              loadDatabaseData();
+                            }}
+                            className="absolute top-1 right-1 p-1 bg-black/60 rounded opacity-0 group-hover:opacity-100 hover:text-red-500 transition"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
                         </div>
                       ))}
                     </div>
-
-                    <div className="mt-6 border-t border-white/5 pt-4 flex justify-between items-center">
-                      <span className="text-[10px] text-white/30 font-mono">Tip: Click on any word to edit spelling manually.</span>
-                      <button className="bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-400 px-6 py-3 rounded-lg text-xs uppercase tracking-widest font-bold font-inter transition-all duration-300">
-                        Export Subtitled Video
-                      </button>
-                    </div>
-
-                  </div>
-
+                  )}
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* TAB 2: AI SHORTS HOOKS */}
-            {workspaceTab === "shorts" && (
-              <div className="flex-1 flex flex-col">
-                <div className="border-b border-white/5 pb-6 mb-8">
-                  <h2 className="text-xl font-bold font-inter text-white">AI Shorts Clip Generator (Opus style)</h2>
-                  <p className="text-xs text-white/40 font-inter mt-1">Insert a long video URL to automatically clip the most engaging, hook-worthy moments into vertical shorts.</p>
-                </div>
-
-                <div className="grid lg:grid-cols-12 gap-8 items-start">
-                  
-                  {/* Left Column URL input */}
-                  <div className="lg:col-span-6 space-y-6">
-                    <div className="p-6 rounded-2xl bg-[#0b0b0b] border border-white/5">
-                      <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase mb-3 block font-inter">Long Video URL (YouTube, Vimeo, etc.)</label>
-                      <div className="flex gap-2">
-                        <input 
-                          type="url" 
-                          placeholder="https://www.youtube.com/watch?v=..."
-                          value={shortsUrl}
-                          onChange={(e) => setShortsUrl(e.target.value)}
-                          className="flex-1 bg-[#141414] border border-white/10 rounded-xl px-4 py-3 text-xs outline-none text-white focus:border-violet-500"
-                        />
-                        <button 
-                          onClick={triggerShortsAnalysis}
-                          disabled={analyzingShorts || !shortsUrl}
-                          className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white px-5 rounded-xl text-xs uppercase tracking-widest font-bold font-inter transition"
-                        >
-                          Analyze Hooks
-                        </button>
-                      </div>
-
-                      {analyzingShorts && (
-                        <div className="mt-6 flex flex-col items-center justify-center p-8 bg-[#141414] border border-white/5 rounded-xl">
-                          <RefreshCw className="w-8 h-8 text-violet-400 animate-spin mb-4" />
-                          <span className="text-xs text-white/80 font-bold uppercase tracking-wider font-inter">Running Neural Hook Analysis</span>
-                          <span className="text-[10px] text-white/40 font-mono mt-1">Calculating high retention time frames...</span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Hook Results Cards */}
-                    {shortsClips.length > 0 && (
-                      <div className="space-y-4">
-                        <span className="text-[10px] font-bold tracking-widest text-white/40 uppercase block font-inter">Auto-Clipped Viral Hooks</span>
-                        
-                        {shortsClips.map((clip) => (
-                          <div key={clip.id} className="p-5 rounded-xl border border-white/5 bg-[#0b0b0b] hover:border-violet-500/30 transition-all flex items-center justify-between">
-                            <div className="space-y-1">
-                              <div className="flex items-center gap-2">
-                                <h4 className="text-xs font-bold font-inter text-white">{clip.title}</h4>
-                                <span className="text-[9px] bg-violet-500/10 text-violet-400 px-2 py-0.5 rounded-full font-bold">
-                                  {clip.score}% viral score
-                                </span>
-                              </div>
-                              <p className="text-[10px] text-white/40 font-mono">Time range: {clip.start} - {clip.end} ({clip.duration})</p>
-                            </div>
-                            
-                            <button className="flex items-center gap-1 bg-white/5 hover:bg-violet-600 border border-white/10 hover:border-violet-500 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider font-inter transition">
-                              Select
-                              <ChevronRight className="w-3 h-3" />
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+              {/* Subtitles & Captions presets */}
+              {sidebarTab === "captions" && (
+                <div className="p-5 space-y-6">
+                  <div className="border-b border-white/5 pb-3">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-white/50">Caption Presets</h3>
                   </div>
 
-                  {/* Right Column Layout Preview */}
-                  <div className="lg:col-span-6 bg-[#0b0b0b] border border-white/5 rounded-2xl p-6">
-                    <h3 className="text-xs font-bold tracking-widest text-white/50 uppercase border-b border-white/5 pb-4 mb-4 font-inter">Auto-Reframed 9:16 Video</h3>
-                    
-                    <div className="aspect-video w-full rounded-xl bg-neutral-900 border border-white/5 flex items-center justify-center relative overflow-hidden">
-                      <img 
-                        src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop"
-                        alt="Landscape base clip"
-                        className="absolute inset-0 w-full h-full object-cover opacity-35"
-                      />
-                      
-                      {/* Crop indicators */}
-                      <div className="absolute top-0 bottom-0 left-[35%] right-[35%] border-2 border-dashed border-violet-500/70 bg-violet-600/5 relative flex flex-col justify-center items-center">
-                        <span className="text-[8px] bg-violet-500 text-white font-mono px-1.5 py-0.5 rounded uppercase tracking-wider absolute top-2">9:16 Clip Focus</span>
-                        <div className="w-6 h-6 rounded-full bg-violet-500 flex items-center justify-center text-white">
-                          <CheckCircle className="w-3.5 h-3.5" />
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-6 space-y-2">
-                      <h4 className="text-xs font-bold text-white font-inter">AI Face-tracking Active</h4>
-                      <p className="text-[10px] text-white/50 leading-relaxed font-inter">
-                        Our dynamic cropper detects faces, products, or points of interest and centers them automatically as they move throughout the timeline.
-                      </p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            )}
-
-            {/* TAB 3: AUDIO ENHANCER */}
-            {workspaceTab === "audio" && (
-              <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full">
-                <div className="border-b border-white/5 pb-6 mb-8">
-                  <h2 className="text-xl font-bold font-inter text-white">AI Studio Audio Enhancer</h2>
-                  <p className="text-xs text-white/40 font-inter mt-1">Isolate speech, delete background noise, and balance voice quality to match top studio podcasts.</p>
-                </div>
-
-                <div className="p-8 rounded-2xl bg-[#0b0b0b] border border-white/5 space-y-8">
-                  
-                  {/* Waveform Visualization area */}
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between text-xs text-white/50 font-mono">
-                      <span>Status: {audioPlaying ? "Playing Wave..." : "Paused"}</span>
-                      <span>Enhancer: {audioEnhanced ? "STUDIO (ACTIVE)" : "RAW (BYPASS)"}</span>
-                    </div>
-
-                    <div className="h-32 bg-[#121212] border border-white/5 rounded-xl flex items-end justify-between p-6 relative overflow-hidden">
-                      {/* Background grid */}
-                      <div className="absolute inset-0 bg-grid-white/[0.02]" />
-
-                      {/* Mock Dynamic wave bars */}
-                      {Array.from({ length: 40 }).map((_, index) => {
-                        const randomHeight = audioPlaying 
-                          ? Math.sin(index + audioProgress) * 40 + 50 
-                          : Math.sin(index) * 20 + 30;
-                        const enhancedHeight = audioEnhanced ? randomHeight * 0.4 + 10 : randomHeight;
-                        
-                        return (
-                          <div 
-                            key={index} 
-                            style={{ height: `${Math.max(5, Math.min(100, index % 2 === 0 ? enhancedHeight : enhancedHeight * 0.7))}%` }}
-                            className={`w-[1.5%] rounded-full transition-all duration-300 ${audioEnhanced ? "bg-violet-400" : "bg-neutral-600"}`}
-                          />
-                        );
-                      })}
-
-                      {/* Timeline head marker */}
-                      <div className="absolute top-0 bottom-0 bg-violet-500 w-0.5" style={{ left: `${audioProgress}%` }} />
-                    </div>
-                  </div>
-
-                  {/* Player Controls & Enhancer Toggle */}
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-6 bg-[#141414] border border-white/5 p-5 rounded-xl">
-                    <div className="flex items-center gap-4">
-                      <button 
-                        onClick={() => setAudioPlaying(!audioPlaying)}
-                        className="w-12 h-12 bg-violet-600 hover:bg-violet-500 rounded-full flex items-center justify-center text-white shadow-lg transition-all duration-300"
-                      >
-                        {audioPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 pl-0.5" />}
-                      </button>
-                      <div>
-                        <h4 className="text-xs font-bold text-white font-inter">Podcast_Interview_Telugu.wav</h4>
-                        <span className="text-[10px] text-white/40 font-mono">Sample audio length: 00:45</span>
-                      </div>
-                    </div>
-
-                    {/* Toggle Slider */}
-                    <div className="flex items-center gap-3 bg-black/40 border border-white/5 px-4 py-2.5 rounded-xl select-none">
-                      <span className="text-[10px] font-bold tracking-widest text-white/50 uppercase font-inter">Original</span>
-                      <button 
-                        onClick={() => setAudioEnhanced(!audioEnhanced)}
-                        className={`w-14 h-7 rounded-full p-1 relative transition-all ${audioEnhanced ? "bg-violet-600" : "bg-neutral-800"}`}
-                      >
-                        <div className={`w-5 h-5 bg-white rounded-full transition-all ${audioEnhanced ? "translate-x-7" : "translate-x-0"}`} />
-                      </button>
-                      <span className="text-[10px] font-bold tracking-widest text-violet-400 uppercase font-inter">AI Enhanced</span>
-                    </div>
-                  </div>
-
-                  {/* Audio Features Checkboxes */}
-                  <div className="grid sm:grid-cols-3 gap-4 border-t border-white/5 pt-6">
+                  <div className="space-y-3">
                     {[
-                      { id: "noise", label: "Delete Ambient Noise", active: true },
-                      { id: "voice", label: "Enhance Voice Quality", active: true },
-                      { id: "volume", label: "Auto Normalize Output", active: false }
-                    ].map((feature) => (
-                      <div key={feature.id} className="p-4 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between">
-                        <span className="text-[11px] font-bold text-white/80 font-inter uppercase tracking-wider">{feature.label}</span>
-                        <div className={`w-4.5 h-4.5 rounded flex items-center justify-center border ${feature.active ? "bg-violet-500/20 border-violet-500 text-violet-400" : "border-white/10"}`}>
-                          {feature.active && <CheckCircle className="w-3.5 h-3.5" />}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                </div>
-              </div>
-            )}
-
-            {/* TAB 4: THUMBNAIL STUDIO */}
-            {workspaceTab === "thumbnail" && (
-              <div className="flex-1 flex flex-col">
-                <div className="border-b border-white/5 pb-6 mb-8">
-                  <h2 className="text-xl font-bold font-inter text-white">AI Click-Worthy Thumbnail Studio</h2>
-                  <p className="text-xs text-white/40 font-inter mt-1">Generate stunning backgrounds using Flux models and overlay high-contrast Telugu text.</p>
-                </div>
-
-                <div className="grid lg:grid-cols-12 gap-8 items-start">
-                  
-                  {/* Left Column Controls */}
-                  <div className="lg:col-span-5 space-y-6">
-                    <div className="p-6 rounded-2xl bg-[#0b0b0b] border border-white/5 space-y-4">
-                      
-                      {/* Image Prompt */}
-                      <div>
-                        <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase mb-2 block font-inter">AI Image Generation Prompt</label>
-                        <textarea 
-                          value={thumbnailPrompt}
-                          onChange={(e) => setThumbnailPrompt(e.target.value)}
-                          rows={3}
-                          className="w-full bg-[#141414] border border-white/10 rounded-xl px-4 py-3 text-xs outline-none text-white focus:border-violet-500 font-inter leading-relaxed"
-                        />
-                      </div>
-
-                      {/* Custom Overlay Text */}
-                      <div>
-                        <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase mb-2 block font-inter">Thumbnail Text (Telugu)</label>
-                        <input 
-                          type="text" 
-                          value={thumbnailText}
-                          onChange={(e) => setThumbnailText(e.target.value)}
-                          className="w-full bg-[#141414] border border-white/10 rounded-xl px-4 py-3 text-xs outline-none text-white focus:border-violet-500 font-inter"
-                        />
-                      </div>
-
-                      {/* Text Color Picker */}
-                      <div>
-                        <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase mb-2 block font-inter">Text Highlights Color</label>
-                        <div className="flex gap-2">
-                          {[
-                            { name: "Yellow", hex: "#FFFF00" },
-                            { name: "Magenta", hex: "#FF00FF" },
-                            { name: "Cyan", hex: "#00FFFF" },
-                            { name: "Green", hex: "#39FF14" }
-                          ].map((col) => (
-                            <button
-                              key={col.hex}
-                              onClick={() => setThumbnailColor(col.hex)}
-                              style={{ backgroundColor: col.hex }}
-                              className={`w-8 h-8 rounded-full border-2 ${thumbnailColor === col.hex ? "border-white" : "border-transparent"}`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-
-                      <button 
-                        onClick={handleGenerateThumbnail}
-                        disabled={generatingThumbnail}
-                        className="w-full bg-violet-600 hover:bg-violet-500 disabled:opacity-50 py-3.5 rounded-xl text-xs uppercase tracking-widest font-bold font-inter transition-all"
-                      >
-                        {generatingThumbnail ? "Synthesizing Image..." : "Generate AI Thumbnail"}
-                      </button>
-
-                    </div>
-                  </div>
-
-                  {/* Right Column Preview Canvas */}
-                  <div className="lg:col-span-7 bg-[#0b0b0b] border border-white/5 rounded-2xl p-6">
-                    <h3 className="text-xs font-bold tracking-widest text-white/50 uppercase border-b border-white/5 pb-4 mb-4 font-inter">Live Canvas Preview</h3>
-                    
-                    <div className="aspect-video w-full rounded-xl bg-neutral-900 border border-white/5 flex flex-col items-center justify-center relative overflow-hidden shadow-inner select-none">
-                      <img 
-                        src={thumbnailUrl}
-                        alt="Thumbnail generated canvas background"
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black/15" />
-
-                      {/* High Contrast Text Overlay (Simulates YouTube Thumbnail meta) */}
-                      <div className="z-10 mt-auto mb-6 ml-6 mr-auto text-left">
-                        <div 
-                          style={{ color: thumbnailColor, textShadow: "4px 4px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000" }}
-                          className="text-3xl sm:text-4xl md:text-5xl font-black font-podium uppercase tracking-wide leading-tight drop-shadow-lg"
-                        >
-                          {thumbnailText}
-                        </div>
-                      </div>
-
-                      {/* Mock YouTube play icon to preview in-app feel */}
-                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-                        <Play className="w-16 h-16 text-white" />
-                      </div>
-                    </div>
-
-                    <div className="mt-6 flex justify-between items-center">
-                      <span className="text-[10px] text-white/30 font-mono">Output aspect ratio: 16:9 (1920x1080px)</span>
-                      <button className="flex items-center gap-1.5 border border-white/20 hover:border-white/40 hover:bg-white/5 px-5 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-wider font-inter transition">
-                        Download Image
-                      </button>
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-            )}
-
-            {/* TAB 5: SOCIAL PUBLISHER */}
-            {workspaceTab === "publisher" && (
-              <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full">
-                <div className="border-b border-white/5 pb-6 mb-8">
-                  <h2 className="text-xl font-bold font-inter text-white">AI Social publisher & Scheduler</h2>
-                  <p className="text-xs text-white/40 font-inter mt-1">Generate optimized descriptions, tags, and hashtags, and schedule posts directly to your channels.</p>
-                </div>
-
-                <div className="p-8 rounded-2xl bg-[#0b0b0b] border border-white/5 space-y-6">
-                  
-                  {/* Select Platform Row */}
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { id: "instagram", label: "Instagram Reels" },
-                      { id: "youtube", label: "YouTube Shorts" },
-                      { id: "tiktok", label: "TikTok Video" }
-                    ].map((plat) => (
+                      { id: "bold", name: "Submagic Yellow", desc: "Yellow text with heavy border shadows" },
+                      { id: "neon", name: "Neon Lime", desc: "Vibrant glowing outline style" },
+                      { id: "glow", name: "Purple Glow", desc: "Soft ambient backdrop glow styling" },
+                      { id: "minimal", name: "Clean Minimal", desc: "Lightweight tracking lowercase style" }
+                    ].map((pre) => (
                       <button
-                        key={plat.id}
-                        onClick={() => setSocialPlatform(plat.id)}
-                        className={`py-3.5 px-2 text-xs uppercase tracking-wider font-bold rounded-xl border font-inter transition-all ${socialPlatform === plat.id ? "bg-violet-600 border-violet-500 text-white shadow-lg" : "bg-black/40 border-white/5 text-white/50 hover:border-white/10 hover:text-white"}`}
+                        key={pre.id}
+                        onClick={() => setCaptionStyle({ ...captionStyle, stylePreset: pre.id as any })}
+                        className={`w-full text-left p-4 rounded-xl border transition-all ${captionStyle.stylePreset === pre.id ? "bg-violet-600/15 border-violet-500 text-white" : "bg-black/20 border-white/5 text-white/60 hover:border-white/10"}`}
                       >
-                        {plat.label}
+                        <h4 className="text-xs font-bold font-inter">{pre.name}</h4>
+                        <p className="text-[10px] text-white/40 mt-1">{pre.desc}</p>
                       </button>
                     ))}
                   </div>
 
-                  {/* Text Generator Area */}
-                  <div className="bg-[#141414] border border-white/5 rounded-xl p-5 space-y-4">
-                    <div className="flex items-center justify-between text-xs text-white/50 font-mono">
-                      <span>Copywriter Engine</span>
-                      <button 
-                        onClick={handleWriteCopy}
-                        disabled={writingCopy}
-                        className="text-violet-400 hover:text-violet-300 font-bold uppercase tracking-wider text-[10px]"
-                      >
-                        {writingCopy ? "Generating..." : "Generate Optimized Copy"}
-                      </button>
-                    </div>
+                  {/* Active Captions Editor List */}
+                  <div className="space-y-3">
+                    <span className="text-[10px] font-bold tracking-widest text-white/40 uppercase block">Active Timestamps</span>
+                    
+                    {activeProject.tracks.subtitle.map((sub, idx) => (
+                      <div key={sub.id} className="p-3.5 bg-black/40 border border-white/5 rounded-xl flex items-center justify-between">
+                        <div className="space-y-1">
+                          <input 
+                            type="text" 
+                            value={sub.text}
+                            onChange={(e) => {
+                              const updatedSub = activeProject.tracks.subtitle.map(item =>
+                                item.id === sub.id ? { ...item, text: e.target.value } : item
+                              );
+                              const updated = {
+                                ...activeProject,
+                                tracks: { ...activeProject.tracks, subtitle: updatedSub }
+                              };
+                              setActiveProject(updated);
+                              saveProject(updated);
+                            }}
+                            className="bg-neutral-900 border border-white/5 text-xs text-white rounded px-2 py-1 outline-none focus:border-violet-500 w-full"
+                          />
+                          <div className="text-[9px] font-mono text-white/40">Timestamp: {sub.start.toFixed(1)}s - {(sub.start + sub.duration).toFixed(1)}s</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
-                    <textarea
-                      value={generatedCopy}
-                      onChange={(e) => setGeneratedCopy(e.target.value)}
-                      placeholder="Your generated social description and viral hashtags will appear here..."
-                      rows={6}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-xs outline-none text-white focus:border-violet-500 font-inter leading-relaxed"
-                    />
+              {/* Audio panel */}
+              {sidebarTab === "audio" && (
+                <div className="p-5 space-y-6">
+                  <div className="border-b border-white/5 pb-3">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-white/50">Audio Manager</h3>
                   </div>
 
-                  {/* Scheduler Form Row */}
-                  <div className="grid sm:grid-cols-2 gap-6 items-end border-t border-white/5 pt-6">
-                    <div>
-                      <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase mb-2 block font-inter">Post Schedule Date & Time</label>
+                  {/* Noise removal toggle */}
+                  <div className="p-5 rounded-xl border border-white/5 bg-black/20 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h4 className="text-xs font-bold font-inter text-white">Remove Background Noise</h4>
+                        <p className="text-[9px] text-white/40 font-inter mt-0.5">Filters low-end rumble and high-end hiss.</p>
+                      </div>
+                      
+                      <button 
+                        onClick={() => setNoiseRemovalActive(!noiseRemovalActive)}
+                        className={`w-11 h-6 rounded-full p-1 transition-all ${noiseRemovalActive ? "bg-violet-600" : "bg-neutral-800"}`}
+                      >
+                        <div className={`w-4 h-4 bg-white rounded-full transition-all ${noiseRemovalActive ? "translate-x-5" : "translate-x-0"}`} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Volume slide */}
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase block">Global Audio Volume</label>
+                    <input 
+                      type="range"
+                      min="0.0"
+                      max="2.0"
+                      step="0.1"
+                      value={audioVolume}
+                      onChange={(e) => setAudioVolume(parseFloat(e.target.value))}
+                      className="w-full accent-violet-500"
+                    />
+                    <div className="flex justify-between text-[9px] font-mono text-white/40">
+                      <span>Muted</span>
+                      <span>100%</span>
+                      <span>Boost (200%)</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* AI tools */}
+              {sidebarTab === "ai" && (
+                <div className="p-5 space-y-6">
+                  <div className="border-b border-white/5 pb-3">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-white/50">AI Short Tool</h3>
+                  </div>
+
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase block">Input URL</label>
+                    <div className="flex gap-2">
                       <input 
-                        type="datetime-local" 
-                        value={scheduledTime}
-                        onChange={(e) => setScheduledTime(e.target.value)}
-                        className="w-full bg-[#141414] border border-white/10 rounded-xl px-4 py-3.5 text-xs outline-none text-white focus:border-violet-500 font-mono"
+                        type="url"
+                        placeholder="YouTube URL..."
+                        value={shortsUrl}
+                        onChange={(e) => setShortsUrl(e.target.value)}
+                        className="bg-[#141414] border border-white/10 rounded-xl px-3 py-2 text-xs outline-none focus:border-violet-500 flex-1"
+                      />
+                      <button 
+                        onClick={triggerShortsAnalysis}
+                        disabled={analyzingShorts || !shortsUrl}
+                        className="bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white px-3 rounded-lg text-xs uppercase tracking-wider font-bold transition"
+                      >
+                        Crop
+                      </button>
+                    </div>
+                  </div>
+
+                  {analyzingShorts && (
+                    <div className="p-6 text-center border border-white/5 rounded-xl bg-black/40 flex flex-col items-center">
+                      <RefreshCw className="w-6 h-6 text-violet-400 animate-spin mb-3" />
+                      <span className="text-[10px] font-bold uppercase tracking-wider">Analyzing hook matrices...</span>
+                    </div>
+                  )}
+
+                  {shortsClips.length > 0 && (
+                    <div className="space-y-2">
+                      {shortsClips.map((clip) => (
+                        <div key={clip.id} className="p-4 rounded-xl border border-white/5 bg-black/40 flex justify-between items-center">
+                          <div>
+                            <h4 className="text-[11px] font-bold text-white truncate max-w-[150px]">{clip.title}</h4>
+                            <span className="text-[9px] text-white/40 font-mono mt-0.5 block">{clip.score}% hook rate</span>
+                          </div>
+                          <button 
+                            onClick={() => setPlayhead(clip.start)}
+                            className="bg-violet-600/10 border border-violet-500/20 text-violet-400 px-3 py-1.5 rounded-lg text-[9px] uppercase tracking-wider font-bold hover:bg-violet-600 hover:text-white transition"
+                          >
+                            Jump
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Thumbnail designer */}
+              {sidebarTab === "thumbnail" && (
+                <div className="p-5 space-y-6">
+                  <div className="border-b border-white/5 pb-3">
+                    <h3 className="text-xs font-bold uppercase tracking-widest text-white/50">Thumbnail Builder</h3>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase block mb-2">Prompt</label>
+                      <textarea 
+                        value={thumbPrompt}
+                        onChange={(e) => setThumbPrompt(e.target.value)}
+                        rows={2}
+                        className="w-full bg-[#141414] border border-white/10 rounded-xl px-3 py-2 text-xs outline-none text-white focus:border-violet-500 font-inter"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-[10px] font-bold tracking-widest text-white/40 uppercase block mb-2">Title Text (Telugu)</label>
+                      <input 
+                        type="text" 
+                        value={thumbText}
+                        onChange={(e) => setThumbText(e.target.value)}
+                        className="w-full bg-[#141414] border border-white/10 rounded-xl px-3 py-2 text-xs outline-none text-white focus:border-violet-500 font-inter"
                       />
                     </div>
 
                     <button 
-                      onClick={handleSchedulePost}
-                      className="w-full bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-400 py-3.5 rounded-xl text-xs uppercase tracking-widest font-bold font-inter transition shadow-lg shadow-violet-500/25"
+                      onClick={handleGenerateThumbnail}
+                      disabled={generatingThumb}
+                      className="w-full bg-violet-600 hover:bg-violet-500 disabled:opacity-50 py-3 rounded-xl text-xs uppercase tracking-widest font-bold transition"
                     >
-                      Schedule Publication
+                      {generatingThumb ? "Generating..." : "Generate AI Frame"}
+                    </button>
+                    
+                    <div className="aspect-video w-full rounded-xl overflow-hidden relative border border-white/5">
+                      <img src={thumbImage} alt="Thumbnail canvas preview" className="w-full h-full object-cover" />
+                      <div className="absolute bottom-2 left-2 right-2 text-center text-xs font-black font-podium uppercase border-black text-yellow-400 drop-shadow-[2px_2px_0px_#000]">
+                        {thumbText}
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={downloadThumbnailImage}
+                      className="w-full bg-white/5 hover:bg-white/10 border border-white/10 py-3 rounded-xl text-xs uppercase tracking-widest font-bold transition flex items-center justify-center gap-1.5"
+                    >
+                      <Download className="w-4 h-4" />
+                      Download Thumbnail
                     </button>
                   </div>
+                </div>
+              )}
 
-                  {/* Notification popup */}
-                  {scheduledSuccessfully && (
-                    <div className="p-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 flex items-center gap-3 text-xs font-inter font-semibold">
-                      <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                      Post successfully scheduled for {new Date(scheduledTime).toLocaleString()}!
-                    </div>
-                  )}
+            </div>
 
+            {/* 3. CENTER PREVIEW CANVAS & CONTROLS */}
+            <div className="flex-1 bg-black flex flex-col justify-between overflow-hidden relative">
+              
+              {/* Playback Viewport wrapper */}
+              <div className="flex-1 flex items-center justify-center p-6">
+                <div 
+                  className={`aspect-[9/16] h-[75%] max-h-[500px] border border-white/10 rounded-2xl overflow-hidden relative bg-[#050505] shadow-2xl flex items-center justify-center`}
+                >
+                  <canvas 
+                    ref={canvasRef} 
+                    width={1080}
+                    height={1920}
+                    className="w-full h-full object-cover"
+                  />
+                  
+                  {/* Floating timestamp badge */}
+                  <span className="absolute top-4 left-4 bg-black/60 px-3 py-1 rounded-full text-[10px] font-mono border border-white/5 text-white/80">
+                    {playhead.toFixed(2)}s
+                  </span>
                 </div>
               </div>
-            )}
 
-          </main>
+              {/* Viewport Playback Controller bar */}
+              <div className="bg-[#050505] border-t border-white/5 p-4 flex items-center justify-between px-6">
+                <div className="flex items-center gap-3">
+                  <button 
+                    onClick={() => setIsPlaying(!isPlaying)}
+                    className="w-10 h-10 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full flex items-center justify-center transition"
+                  >
+                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 pl-0.5" />}
+                  </button>
+                  <span className="text-xs font-mono text-white/50">
+                    00:{playhead.toFixed(0).padStart(2, "0")} / 00:30
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3 text-xs uppercase tracking-wider text-white/40">
+                  <span>Aspect: {activeProject.settings.aspectRatio}</span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* 4. RIGHT SIDEBAR PROPERTIES PANEL */}
+            <aside className="w-full lg:w-80 bg-[#080808] border-l border-white/5 p-5 space-y-8 overflow-y-auto">
+              
+              {/* Transform Property card */}
+              <div className="space-y-4">
+                <h3 className="text-xs font-bold tracking-widest text-white/50 uppercase border-b border-white/5 pb-2">Properties Panel</h3>
+                
+                {selectedClipId ? (
+                  <div className="space-y-5">
+                    {/* Display info about active clip */}
+                    <div>
+                      <div className="text-[10px] text-white/40 uppercase font-mono">Selected Clip ID</div>
+                      <div className="text-xs font-bold font-inter truncate mt-0.5">{selectedClipId}</div>
+                    </div>
+
+                    {/* Scale (zoom) slider */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[10px] font-bold text-white/40 uppercase">
+                        <span>Scale (Zoom)</span>
+                        <span>
+                          {Math.floor((activeProject.tracks.video.find(c => c.id === selectedClipId)?.scale || 1.0) * 100)}%
+                        </span>
+                      </div>
+                      <input 
+                        type="range"
+                        min="0.2"
+                        max="4.0"
+                        step="0.05"
+                        value={activeProject.tracks.video.find(c => c.id === selectedClipId)?.scale || 1.0}
+                        onChange={(e) => handleUpdateClipProperty("scale", parseFloat(e.target.value))}
+                        className="w-full accent-violet-500"
+                      />
+                    </div>
+
+                    {/* Rotation slider */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[10px] font-bold text-white/40 uppercase">
+                        <span>Rotation</span>
+                        <span>
+                          {activeProject.tracks.video.find(c => c.id === selectedClipId)?.rotation || 0}°
+                        </span>
+                      </div>
+                      <input 
+                        type="range"
+                        min="0"
+                        max="360"
+                        step="1"
+                        value={activeProject.tracks.video.find(c => c.id === selectedClipId)?.rotation || 0}
+                        onChange={(e) => handleUpdateClipProperty("rotation", parseInt(e.target.value))}
+                        className="w-full accent-violet-500"
+                      />
+                    </div>
+
+                    {/* Horizontal Pos X slider */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[10px] font-bold text-white/40 uppercase">
+                        <span>Offset X</span>
+                        <span>
+                          {activeProject.tracks.video.find(c => c.id === selectedClipId)?.x || 0}px
+                        </span>
+                      </div>
+                      <input 
+                        type="range"
+                        min="-200"
+                        max="200"
+                        step="1"
+                        value={activeProject.tracks.video.find(c => c.id === selectedClipId)?.x || 0}
+                        onChange={(e) => handleUpdateClipProperty("x", parseInt(e.target.value))}
+                        className="w-full accent-violet-500"
+                      />
+                    </div>
+
+                    {/* Vertical Pos Y slider */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[10px] font-bold text-white/40 uppercase">
+                        <span>Offset Y</span>
+                        <span>
+                          {activeProject.tracks.video.find(c => c.id === selectedClipId)?.y || 0}px
+                        </span>
+                      </div>
+                      <input 
+                        type="range"
+                        min="-200"
+                        max="200"
+                        step="1"
+                        value={activeProject.tracks.video.find(c => c.id === selectedClipId)?.y || 0}
+                        onChange={(e) => handleUpdateClipProperty("y", parseInt(e.target.value))}
+                        className="w-full accent-violet-500"
+                      />
+                    </div>
+
+                    {/* Speed Controls */}
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[10px] font-bold text-white/40 uppercase">
+                        <span>Speed</span>
+                        <span>
+                          {activeProject.tracks.video.find(c => c.id === selectedClipId)?.speed || 1.0}x
+                        </span>
+                      </div>
+                      <input 
+                        type="range"
+                        min="0.25"
+                        max="3.0"
+                        step="0.25"
+                        value={activeProject.tracks.video.find(c => c.id === selectedClipId)?.speed || 1.0}
+                        onChange={(e) => handleUpdateClipProperty("speed", parseFloat(e.target.value))}
+                        className="w-full accent-violet-500"
+                      />
+                    </div>
+
+                    {/* Flips Row */}
+                    <div className="grid grid-cols-2 gap-3 pt-2">
+                      <button 
+                        onClick={() => {
+                          const current = activeProject.tracks.video.find(c => c.id === selectedClipId)?.flipX || false;
+                          handleUpdateClipProperty("flipX", !current);
+                        }}
+                        className={`py-2 px-3 border rounded-xl text-[10px] uppercase font-bold tracking-wider font-inter transition-all ${activeProject.tracks.video.find(c => c.id === selectedClipId)?.flipX ? "bg-violet-600/10 border-violet-500 text-violet-400" : "bg-black/20 border-white/5 text-white/50"}`}
+                      >
+                        Flip X
+                      </button>
+                      
+                      <button 
+                        onClick={() => {
+                          const current = activeProject.tracks.video.find(c => c.id === selectedClipId)?.flipY || false;
+                          handleUpdateClipProperty("flipY", !current);
+                        }}
+                        className={`py-2 px-3 border rounded-xl text-[10px] uppercase font-bold tracking-wider font-inter transition-all ${activeProject.tracks.video.find(c => c.id === selectedClipId)?.flipY ? "bg-violet-600/10 border-violet-500 text-violet-400" : "bg-black/20 border-white/5 text-white/50"}`}
+                      >
+                        Flip Y
+                      </button>
+                    </div>
+
+                  </div>
+                ) : (
+                  <div className="p-6 text-center border border-dashed border-white/5 rounded-xl text-white/30 text-xs">
+                    Select a video clip block in the timeline to adjust properties.
+                  </div>
+                )}
+              </div>
+
+              {/* Subtitle Properties settings */}
+              <div className="space-y-4 pt-4 border-t border-white/5">
+                <h3 className="text-xs font-bold tracking-widest text-white/50 uppercase">Subtitles Style</h3>
+                
+                <div className="space-y-4">
+                  {/* Font picker */}
+                  <div>
+                    <label className="text-[9px] font-bold tracking-wider text-white/40 uppercase block mb-1">Font family</label>
+                    <select 
+                      value={captionStyle.fontFamily}
+                      onChange={(e) => setCaptionStyle({ ...captionStyle, fontFamily: e.target.value })}
+                      className="w-full bg-[#141414] border border-white/10 rounded-xl px-3 py-2 text-xs outline-none text-white focus:border-violet-500"
+                    >
+                      <option value="Inter">Inter Font (Standard)</option>
+                      <option value="Arial">Arial (Sleek)</option>
+                      <option value="system-ui">System Default</option>
+                    </select>
+                  </div>
+
+                  {/* Font Size slider */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-[9px] font-bold text-white/40 uppercase">
+                      <span>Font Size</span>
+                      <span>{captionStyle.fontSize}px</span>
+                    </div>
+                    <input 
+                      type="range"
+                      min="12"
+                      max="60"
+                      step="2"
+                      value={captionStyle.fontSize}
+                      onChange={(e) => setCaptionStyle({ ...captionStyle, fontSize: parseInt(e.target.value) })}
+                      className="w-full accent-violet-500"
+                    />
+                  </div>
+
+                  {/* Text Highlights Color picker */}
+                  <div>
+                    <label className="text-[9px] font-bold tracking-wider text-white/40 uppercase block mb-1">Text Color</label>
+                    <div className="flex gap-2">
+                      {["#FFFFFF", "#FFFF00", "#FF00FF", "#39FF14"].map((col) => (
+                        <button
+                          key={col}
+                          onClick={() => setCaptionStyle({ ...captionStyle, textColor: col })}
+                          style={{ backgroundColor: col }}
+                          className={`w-6 h-6 rounded-full border-2 ${captionStyle.textColor === col ? "border-white" : "border-transparent"}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Positioning slider */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-[9px] font-bold text-white/40 uppercase">
+                      <span>Y Alignment Position</span>
+                      <span>{captionStyle.yPositionPercent}%</span>
+                    </div>
+                    <input 
+                      type="range"
+                      min="10"
+                      max="90"
+                      step="5"
+                      value={captionStyle.yPositionPercent}
+                      onChange={(e) => setCaptionStyle({ ...captionStyle, yPositionPercent: parseInt(e.target.value) })}
+                      className="w-full accent-violet-500"
+                    />
+                  </div>
+
+                  {/* Animation toggles */}
+                  <div>
+                    <label className="text-[9px] font-bold tracking-wider text-white/40 uppercase block mb-1">Active Animation</label>
+                    <select
+                      value={captionStyle.animation}
+                      onChange={(e) => setCaptionStyle({ ...captionStyle, animation: e.target.value as any })}
+                      className="w-full bg-[#141414] border border-white/10 rounded-xl px-3 py-2 text-xs outline-none text-white focus:border-violet-500"
+                    >
+                      <option value="scale">Scale Active Word (Karaoke)</option>
+                      <option value="none">No Animation</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Local Exporter Config Card */}
+              <div className="space-y-4 pt-6 border-t border-white/5">
+                <h3 className="text-xs font-bold tracking-widest text-white/50 uppercase">Local rendering</h3>
+                
+                <div className="p-4 rounded-xl border border-white/5 bg-black/20 space-y-4">
+                  <div className="flex justify-between text-[10px] text-white/50 font-mono">
+                    <span>Target Res</span>
+                    <select 
+                      value={exportRes} 
+                      onChange={(e) => setExportRes(e.target.value)}
+                      className="bg-neutral-900 border border-white/5 text-[9px] px-1 py-0.5 rounded text-white"
+                    >
+                      <option value="720p">720P HD</option>
+                      <option value="1080p">1080P Full HD</option>
+                      <option value="2k">2K Quad HD</option>
+                      <option value="4k">4K Ultra HD</option>
+                    </select>
+                  </div>
+
+                  {isExporting ? (
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[9px] font-mono text-white/60">
+                        <span>Rendering: {exportProgress}%</span>
+                      </div>
+                      <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-full bg-violet-500" style={{ width: `${exportProgress}%` }} />
+                      </div>
+                    </div>
+                  ) : (
+                    <button 
+                      onClick={handleExportVideo}
+                      className="w-full bg-gradient-to-r from-violet-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-400 py-3 rounded-xl text-xs uppercase tracking-widest font-bold font-inter transition-all"
+                    >
+                      Export Video Clip
+                    </button>
+                  )}
+
+                  {exportBlobUrl && (
+                    <a 
+                      href={exportBlobUrl}
+                      download={`${activeProject.name}_export.mp4`}
+                      className="w-full bg-white/5 hover:bg-white/10 border border-white/10 py-3 rounded-xl text-xs uppercase tracking-widest font-bold font-inter transition-all flex items-center justify-center gap-1.5"
+                    >
+                      <Download className="w-4 h-4" />
+                      Save Export file
+                    </a>
+                  )}
+                </div>
+              </div>
+
+            </aside>
+
+          </div>
+
+          {/* 5. BOTTOM TIMELINE MULTI-TRACK INTERACTION GRID */}
+          <div className="h-72 bg-[#050505] border-t border-white/5 flex flex-col justify-between overflow-hidden">
+            
+            {/* Timeline Action Tools */}
+            <div className="px-6 py-3 border-b border-white/5 flex items-center justify-between bg-[#080808]">
+              <div className="flex items-center gap-3">
+                
+                <button 
+                  onClick={handleSplitClip}
+                  disabled={!selectedClipId}
+                  className="flex items-center gap-1.5 bg-white/5 hover:bg-white/10 disabled:opacity-30 border border-white/10 px-4 py-2 rounded-lg text-[10px] uppercase font-bold tracking-wider font-inter transition"
+                >
+                  <Scissors className="w-3.5 h-3.5" />
+                  Split Clip
+                </button>
+                
+                <button 
+                  onClick={handleDeleteClip}
+                  disabled={!selectedClipId}
+                  className="flex items-center gap-1.5 hover:bg-red-500/10 border border-white/5 hover:border-red-500/20 disabled:opacity-30 rounded-lg text-white/40 hover:text-red-500 px-4 py-2 text-[10px] uppercase font-bold tracking-wider font-inter transition"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  Delete Clip
+                </button>
+
+              </div>
+              
+              <div className="text-[10px] font-mono text-white/40">
+                Playhead Seek position: {playhead.toFixed(2)} seconds
+              </div>
+            </div>
+
+            {/* Timeline tracks overflow area */}
+            <div className="flex-1 overflow-y-auto overflow-x-auto relative p-6 space-y-4">
+              
+              {/* Ruler background ticks */}
+              <div className="h-4 w-[1500px] border-b border-white/5 relative mb-2">
+                {Array.from({ length: 30 }).map((_, index) => (
+                  <div 
+                    key={index} 
+                    style={{ left: `${index * 50}px` }} 
+                    className="absolute bottom-0 text-[8px] font-mono text-white/30 pl-1 border-l border-white/10 h-2.5"
+                  >
+                    {index}s
+                  </div>
+                ))}
+              </div>
+
+              {/* TRACK 1: Video Track */}
+              <div className="h-10 w-[1500px] bg-neutral-900/40 border border-white/5 rounded-xl relative flex items-center p-1">
+                <span className="absolute left-3 text-[8px] font-bold uppercase tracking-widest text-white/30 select-none z-10">VIDEO TRACK</span>
+                
+                {activeProject.tracks.video.map((clip) => (
+                  <div
+                    key={clip.id}
+                    onClick={() => { setSelectedClipId(clip.id); setSelectedTrackType("video"); }}
+                    style={{
+                      left: `${clip.start * 50}px`,
+                      width: `${clip.duration * 50}px`
+                    }}
+                    className={`h-8 rounded-lg absolute flex items-center justify-between px-3 cursor-pointer select-none overflow-hidden transition-all ${selectedClipId === clip.id ? "bg-violet-600 text-white shadow-lg border border-violet-400" : "bg-[#141414] border border-white/5 text-white/70 hover:bg-[#1c1c1c]"}`}
+                  >
+                    <span className="text-[9px] font-bold font-inter truncate max-w-[120px]">{clip.name}</span>
+                    <span className="text-[8px] font-mono text-white/40">{(clip.duration).toFixed(1)}s</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* TRACK 2: Subtitle Track */}
+              <div className="h-10 w-[1500px] bg-neutral-900/40 border border-white/5 rounded-xl relative flex items-center p-1">
+                <span className="absolute left-3 text-[8px] font-bold uppercase tracking-widest text-white/30 select-none z-10">SUBTITLE TRACK</span>
+                
+                {activeProject.tracks.subtitle.map((sub) => (
+                  <div
+                    key={sub.id}
+                    style={{
+                      left: `${sub.start * 50}px`,
+                      width: `${sub.duration * 50}px`
+                    }}
+                    className="h-8 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-lg absolute flex items-center justify-center px-3"
+                  >
+                    <span className="text-[9px] font-bold font-inter truncate">{sub.text}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Dynamic playback cursor head overlay */}
+              <div 
+                style={{ left: `${playhead * 50}px` }} 
+                className="absolute top-0 bottom-0 w-0.5 bg-violet-500 pointer-events-none z-30 transition-all duration-75"
+              >
+                <div className="w-3 h-3 bg-violet-500 rounded-full absolute top-0 -left-[5px] shadow-lg shadow-violet-500/50" />
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
       )}
 
@@ -1391,7 +1439,6 @@ export default function Page() {
             <p className="text-xs text-white/40 font-inter mt-1">Integrate our advanced Whisper-based auto captioning and video reframing pipelines directly into your own products.</p>
           </div>
 
-          {/* Keys Section */}
           <div className="p-6 rounded-2xl bg-[#0b0b0b] border border-white/5 space-y-6">
             <div className="flex items-center justify-between">
               <div>
@@ -1399,7 +1446,10 @@ export default function Page() {
                 <p className="text-[10px] text-white/40 font-inter mt-0.5">Keep these credentials secure. Never disclose them in client-side code.</p>
               </div>
               <button 
-                onClick={handleGenerateApiKey}
+                onClick={() => {
+                  const newKey = `ts_live_${Math.random().toString(36).substring(2, 10)}${Math.random().toString(36).substring(2, 10)}`;
+                  setApiKeys([...apiKeys, newKey]);
+                }}
                 className="flex items-center gap-1.5 border border-white/10 hover:border-white/30 hover:bg-white/5 px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider font-inter transition"
               >
                 <Plus className="w-3.5 h-3.5" />
@@ -1417,7 +1467,11 @@ export default function Page() {
                   
                   <div className="flex items-center gap-3">
                     <button 
-                      onClick={() => handleCopyKey(key)} 
+                      onClick={() => {
+                        navigator.clipboard.writeText(key);
+                        setCopiedKey(true);
+                        setTimeout(() => setCopiedKey(false), 2000);
+                      }}
                       className="text-white/40 hover:text-white transition flex items-center gap-1 text-[10px]"
                     >
                       {copiedKey ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -1429,13 +1483,10 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Code Endpoint Showcase */}
           <div className="grid lg:grid-cols-12 gap-8 items-start">
             
-            {/* Left selector */}
             <div className="lg:col-span-5 bg-[#0b0b0b] border border-white/5 rounded-2xl p-6 space-y-4">
               <h4 className="text-xs font-bold tracking-widest text-white/50 uppercase font-inter">SDK Code Blocks</h4>
-              
               <div className="flex flex-col gap-2">
                 {[
                   { id: "curl", label: "cURL CLI" },
@@ -1453,9 +1504,7 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Right code board */}
             <div className="lg:col-span-7 bg-[#0b0b0b] border border-white/5 rounded-2xl p-6 font-mono text-xs overflow-x-auto text-violet-300">
-              
               <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-4 text-[10px] text-white/40 uppercase tracking-widest font-mono">
                 <span>POST /v1/transcribe/telugu</span>
                 <span>Language: {activeCodeLang}</span>
@@ -1508,7 +1557,6 @@ print(transcription.get("words"))`}
               <div className="mt-6 text-[10px] text-white/30 font-mono">
                 Response: Returns a JSON array containing transcribed words, confidence index, start timestamps, and end timestamps.
               </div>
-
             </div>
 
           </div>
@@ -1525,14 +1573,12 @@ print(transcription.get("words"))`}
               <h2 className="text-2xl font-bold font-inter text-white">GPU Node Cluster Console</h2>
               <p className="text-xs text-white/40 font-inter mt-1">Monitor GPU instances, celery execution pipelines, billing metrics, and translation jobs.</p>
             </div>
-            
             <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-3.5 py-1.5 rounded-full text-xs font-mono">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               SYSTEM HEALTH: 99.9%
             </div>
           </div>
 
-          {/* Metrics grids */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { label: "Active Whisper Pipelines", val: "14 nodes", desc: "GPU Cluster Load", icon: <Cpu className="w-5 h-5 text-violet-400" /> },
@@ -1553,7 +1599,6 @@ print(transcription.get("words"))`}
             ))}
           </div>
 
-          {/* GPU Cluster Cluster Nodes Detail */}
           <div className="bg-[#0b0b0b] border border-white/5 rounded-2xl p-6">
             <h3 className="text-xs font-bold tracking-widest text-white/50 uppercase border-b border-white/5 pb-4 mb-6 font-inter">Active NVIDIA A10G Instances</h3>
             
@@ -1598,56 +1643,34 @@ print(transcription.get("words"))`}
             <p className="text-xs text-white/40 font-inter mt-1">Explore our scalable system infrastructure diagram and relational database design representing 1M+ active user capability.</p>
           </div>
 
-          {/* Infrastructure Diagram using Interactive Cards */}
           <div className="space-y-6">
             <h3 className="text-xs font-bold tracking-widest text-white/50 uppercase border-b border-white/5 pb-3 font-inter">Server Pipeline Infrastructure</h3>
             
             <div className="grid md:grid-cols-5 gap-4 items-center">
-              
-              <div className="p-5 bg-[#0b0b0b] border border-white/5 rounded-2xl text-center space-y-2 relative">
-                <div className="text-[10px] font-mono text-violet-400 font-bold uppercase tracking-wider">Step 1</div>
-                <h4 className="text-xs font-bold font-inter text-white uppercase">Client Web App</h4>
-                <p className="text-[9px] text-white/40 font-inter">Next.js static assets served via AWS CloudFront.</p>
-                <div className="hidden md:block absolute top-1/2 right-[-10px] -translate-y-1/2 text-violet-500 text-lg font-bold">→</div>
-              </div>
-
-              <div className="p-5 bg-[#0b0b0b] border border-white/5 rounded-2xl text-center space-y-2 relative">
-                <div className="text-[10px] font-mono text-violet-400 font-bold uppercase tracking-wider">Step 2</div>
-                <h4 className="text-xs font-bold font-inter text-white uppercase">API Gateway</h4>
-                <p className="text-[9px] text-white/40 font-inter">FastAPI routes validations & distributes webhooks.</p>
-                <div className="hidden md:block absolute top-1/2 right-[-10px] -translate-y-1/2 text-violet-500 text-lg font-bold">→</div>
-              </div>
-
-              <div className="p-5 bg-[#0b0b0b] border border-white/5 rounded-2xl text-center space-y-2 relative">
-                <div className="text-[10px] font-mono text-violet-400 font-bold uppercase tracking-wider">Step 3</div>
-                <h4 className="text-xs font-bold font-inter text-white uppercase">Task Broker</h4>
-                <p className="text-[9px] text-white/40 font-inter">Redis Pub/Sub balances Celery workers.</p>
-                <div className="hidden md:block absolute top-1/2 right-[-10px] -translate-y-1/2 text-violet-500 text-lg font-bold">→</div>
-              </div>
-
-              <div className="p-5 bg-[#0b0b0b] border-2 border-violet-500 bg-[#0e0c12] rounded-2xl text-center space-y-2 relative shadow-lg shadow-violet-950/20">
-                <div className="text-[10px] font-mono text-violet-400 font-bold uppercase tracking-wider">Step 4</div>
-                <h4 className="text-xs font-bold font-inter text-white uppercase">Whisper GPU Nodes</h4>
-                <p className="text-[9px] text-white/50 font-inter">NVIDIA A10G clusters generate word timestamps.</p>
-                <div className="hidden md:block absolute top-1/2 right-[-10px] -translate-y-1/2 text-violet-500 text-lg font-bold">→</div>
-              </div>
-
-              <div className="p-5 bg-[#0b0b0b] border border-white/5 rounded-2xl text-center space-y-2 relative">
-                <div className="text-[10px] font-mono text-violet-400 font-bold uppercase tracking-wider">Step 5</div>
-                <h4 className="text-xs font-bold font-inter text-white uppercase">S3 Storage</h4>
-                <p className="text-[9px] text-white/40 font-inter">FFmpeg renders output video directly to bucket.</p>
-              </div>
-
+              {[
+                { step: "Step 1", title: "Client Web App", desc: "Next.js static assets served via AWS CloudFront." },
+                { step: "Step 2", title: "API Gateway", desc: "FastAPI routes validations & distributes webhooks." },
+                { step: "Step 3", title: "Task Broker", desc: "Redis Pub/Sub balances Celery workers." },
+                { step: "Step 4", title: "Whisper GPU Nodes", desc: "NVIDIA A10G clusters generate word timestamps." },
+                { step: "Step 5", title: "S3 Storage", desc: "FFmpeg renders output video directly to bucket." }
+              ].map((item, idx) => (
+                <div 
+                  key={idx}
+                  className={`p-5 rounded-2xl text-center space-y-2 relative border ${idx === 3 ? "border-violet-500 bg-[#0e0c12] shadow-lg shadow-violet-950/20" : "border-white/5 bg-[#0b0b0b]"}`}
+                >
+                  <div className="text-[10px] font-mono text-violet-400 font-bold uppercase tracking-wider">{item.step}</div>
+                  <h4 className="text-xs font-bold font-inter text-white uppercase">{item.title}</h4>
+                  <p className="text-[9px] text-white/40 font-inter leading-relaxed">{item.desc}</p>
+                  {idx < 4 && <div className="hidden md:block absolute top-1/2 right-[-10px] -translate-y-1/2 text-violet-500 text-lg font-bold">→</div>}
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Database Entity Relationship visualization */}
           <div className="space-y-6">
             <h3 className="text-xs font-bold tracking-widest text-white/50 uppercase border-b border-white/5 pb-3 font-inter">Relational Database Schemas (Prisma Models)</h3>
             
             <div className="grid md:grid-cols-3 gap-6">
-              
-              {/* Model 1: User */}
               <div className="p-5 rounded-xl border border-white/5 bg-[#0b0b0b] font-mono text-[10px]">
                 <div className="text-violet-400 font-bold border-b border-white/5 pb-2 mb-3">model User {"{"}</div>
                 <ul className="space-y-1.5 text-white/70 pl-2">
@@ -1662,7 +1685,6 @@ print(transcription.get("words"))`}
                 <div className="text-violet-400 font-bold border-t border-white/5 pt-2 mt-3">{"}"}</div>
               </div>
 
-              {/* Model 2: Project */}
               <div className="p-5 rounded-xl border border-white/5 bg-[#0b0b0b] font-mono text-[10px]">
                 <div className="text-violet-400 font-bold border-b border-white/5 pb-2 mb-3">model Project {"{"}</div>
                 <ul className="space-y-1.5 text-white/70 pl-2">
@@ -1678,7 +1700,6 @@ print(transcription.get("words"))`}
                 <div className="text-violet-400 font-bold border-t border-white/5 pt-2 mt-3">{"}"}</div>
               </div>
 
-              {/* Model 3: Subtitle */}
               <div className="p-5 rounded-xl border border-white/5 bg-[#0b0b0b] font-mono text-[10px]">
                 <div className="text-violet-400 font-bold border-b border-white/5 pb-2 mb-3">model Subtitle {"{"}</div>
                 <ul className="space-y-1.5 text-white/70 pl-2">
@@ -1692,7 +1713,6 @@ print(transcription.get("words"))`}
                 </ul>
                 <div className="text-violet-400 font-bold border-t border-white/5 pt-2 mt-3">{"}"}</div>
               </div>
-
             </div>
           </div>
 
