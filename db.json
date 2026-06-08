@@ -1,0 +1,107 @@
+{
+  "projects": [
+    {
+      "id": "proj_1780923168993",
+      "name": "intro",
+      "lastEdited": "Just now",
+      "duration": "0:15",
+      "resolution": "1080p",
+      "fileSize": "5.7 MB",
+      "status": "ready",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "videoUrl": "/uploads/intro.mp4"
+    },
+    {
+      "id": "proj_1780923116734",
+      "name": "intro",
+      "lastEdited": "Just now",
+      "duration": "0:15",
+      "resolution": "1080p",
+      "fileSize": "5.7 MB",
+      "status": "ready",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "videoUrl": "/uploads/intro.mp4"
+    },
+    {
+      "id": "proj_1780923021347",
+      "name": "intro",
+      "lastEdited": "Just now",
+      "duration": "0:15",
+      "resolution": "1080p",
+      "fileSize": "5.7 MB",
+      "status": "ready",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "videoUrl": "/uploads/intro.mp4"
+    },
+    {
+      "id": "proj_1780922884204",
+      "name": "intro",
+      "lastEdited": "Just now",
+      "duration": "0:15",
+      "resolution": "1080p",
+      "fileSize": "5.7 MB",
+      "status": "ready",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "videoUrl": "/uploads/intro.mp4"
+    },
+    {
+      "id": "proj_1",
+      "name": "Default Startup Intro",
+      "lastEdited": "Just now",
+      "duration": "15.0",
+      "resolution": "1920x1080",
+      "fileSize": "3.3 MB",
+      "status": "ready",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "videoUrl": "/intro.mp4"
+    }
+  ],
+  "mediaFiles": [
+    {
+      "id": "media_1780923168993",
+      "name": "intro.mp4",
+      "size": "5.7 MB",
+      "type": "video",
+      "uploadDate": "2026-06-08",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "url": "/uploads/intro.mp4"
+    },
+    {
+      "id": "media_1780923116734",
+      "name": "intro.mp4",
+      "size": "5.7 MB",
+      "type": "video",
+      "uploadDate": "2026-06-08",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "url": "/uploads/intro.mp4"
+    },
+    {
+      "id": "media_1780923021347",
+      "name": "intro.mp4",
+      "size": "5.7 MB",
+      "type": "video",
+      "uploadDate": "2026-06-08",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "url": "/uploads/intro.mp4"
+    },
+    {
+      "id": "media_1780922884204",
+      "name": "intro.mp4",
+      "size": "5.7 MB",
+      "type": "video",
+      "uploadDate": "2026-06-08",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "url": "/uploads/intro.mp4"
+    },
+    {
+      "id": "media_1",
+      "name": "intro.mp4",
+      "size": "3.3 MB",
+      "type": "video",
+      "uploadDate": "2026-06-08",
+      "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop",
+      "url": "/intro.mp4"
+    }
+  ],
+  "exports": []
+}

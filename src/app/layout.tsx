@@ -11,6 +11,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Techies Studio AI - Create Viral Telugu Videos in Minutes",
   description: "AI captions, professional video editing, AI shorts, thumbnails, translations, dubbing, and publishing for Telugu and Indian creators.",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
